@@ -1,0 +1,7 @@
+services:
+  - type: web
+    name: reliable-vending-solutions
+    env: docker
+    dockerfilePath: ./Dockerfile
+    plan: free
+    autoDeploy: true
