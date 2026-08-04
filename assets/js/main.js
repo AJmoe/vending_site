@@ -18,4 +18,10 @@ document.addEventListener('DOMContentLoaded', function () {
         window.addEventListener('scroll', onScroll, { passive: true });
         onScroll();
     }
+
+    document.querySelectorAll('.card-flip').forEach(function (card) {
+        card.addEventListener('click', function () {
+            card.classList.toggle('is-open');
+        });
+    });
 });

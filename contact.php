@@ -4,8 +4,9 @@ $page_description = 'Get in touch with Reliable Vending Solutions for technical 
 
 require __DIR__ . '/includes/config.php';
 
-$enquiryTypes = ['General Enquiry', 'Technical Support', 'Become an Agent', 'Other'];
-$defaultType = isset($_GET['type']) && $_GET['type'] === 'agent' ? 'Become an Agent' : 'General Enquiry';
+$enquiryTypes = ['General Enquiry', 'Technical Support', 'Other'];
+$defaultType = 'General Enquiry';
+$hide_cta_band = true;
 
 $errors = [];
 $success = false;
@@ -60,7 +61,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 require __DIR__ . '/includes/header.php';
 ?>
 
-<section class="page-hero">
+<section class="page-hero page-hero-compact">
     <div class="container">
         <span class="eyebrow">Contact</span>
         <h1>Get in touch with our team</h1>
@@ -68,7 +69,7 @@ require __DIR__ . '/includes/header.php';
     </div>
 </section>
 
-<section class="section">
+<section class="section section-tight">
     <div class="container">
         <div class="contact-form-card contact-form-card-wide" data-reveal>
             <h2>Send an Enquiry</h2>
@@ -124,74 +125,52 @@ require __DIR__ . '/includes/header.php';
     </div>
 </section>
 
-<section class="section section-alt">
+<section class="section section-tight section-alt">
     <div class="container">
-        <div class="contact-info-grid" data-reveal-stagger>
-            <div class="contact-details-card" data-reveal>
-                <h2>Contact Details</h2>
-                <div class="contact-detail-list">
-                    <div class="contact-detail-row">
-                        <div class="contact-detail-icon"><?= icon('phone') ?></div>
-                        <div class="contact-detail-text">
-                            <div class="contact-detail-label">Phone</div>
-                            <div class="contact-detail-value"><a href="tel:<?= htmlspecialchars(preg_replace('/[^+\d]/', '', CONTACT_PHONE)) ?>"><?= htmlspecialchars(CONTACT_PHONE) ?></a></div>
-                        </div>
-                    </div>
-                    <div class="contact-detail-row">
-                        <div class="contact-detail-icon"><?= icon('message') ?></div>
-                        <div class="contact-detail-text">
-                            <div class="contact-detail-label">WhatsApp</div>
-                            <div class="contact-detail-value"><a href="https://wa.me/<?= htmlspecialchars(preg_replace('/[^\d]/', '', CONTACT_WHATSAPP)) ?>" target="_blank" rel="noopener"><?= htmlspecialchars(CONTACT_WHATSAPP) ?></a></div>
-                        </div>
-                    </div>
-                    <div class="contact-detail-row">
-                        <div class="contact-detail-icon"><?= icon('mail') ?></div>
-                        <div class="contact-detail-text">
-                            <div class="contact-detail-label">Support email</div>
-                            <div class="contact-detail-value"><a href="mailto:<?= htmlspecialchars(CONTACT_EMAIL) ?>"><?= htmlspecialchars(CONTACT_EMAIL) ?></a></div>
-                        </div>
-                    </div>
-                    <div class="contact-detail-row">
-                        <div class="contact-detail-icon"><?= icon('mail') ?></div>
-                        <div class="contact-detail-text">
-                            <div class="contact-detail-label">Sales &amp; enquiries</div>
-                            <div class="contact-detail-value"><a href="mailto:<?= htmlspecialchars(CONTACT_SALES_EMAIL) ?>"><?= htmlspecialchars(CONTACT_SALES_EMAIL) ?></a></div>
-                        </div>
-                    </div>
-                    <div class="contact-detail-row">
-                        <div class="contact-detail-icon"><?= icon('clock') ?></div>
-                        <div class="contact-detail-text">
-                            <div class="contact-detail-label">Office hours</div>
-                            <div class="contact-detail-value"><?= htmlspecialchars(CONTACT_HOURS) ?></div>
-                        </div>
-                    </div>
-                    <div class="contact-detail-row">
-                        <div class="contact-detail-icon"><?= icon('clock') ?></div>
-                        <div class="contact-detail-text">
-                            <div class="contact-detail-label">After-hours support</div>
-                            <div class="contact-detail-value"><?= htmlspecialchars(CONTACT_AFTERHOURS) ?></div>
-                        </div>
-                    </div>
-                    <div class="contact-detail-row">
-                        <div class="contact-detail-icon"><?= icon('map-pin') ?></div>
-                        <div class="contact-detail-text">
-                            <div class="contact-detail-label">Address</div>
-                            <div class="contact-detail-value"><?= htmlspecialchars(CONTACT_ADDRESS) ?></div>
-                        </div>
+        <div class="contact-details-card contact-details-card-standalone" data-reveal>
+            <h2>Contact Details</h2>
+            <div class="contact-detail-list">
+                <div class="contact-detail-row">
+                    <div class="contact-detail-icon"><?= icon('phone') ?></div>
+                    <div class="contact-detail-text">
+                        <div class="contact-detail-label">Phone</div>
+                        <div class="contact-detail-value"><a href="tel:<?= htmlspecialchars(preg_replace('/[^+\d]/', '', CONTACT_PHONE)) ?>"><?= htmlspecialchars(CONTACT_PHONE) ?></a></div>
                     </div>
                 </div>
-            </div>
-
-            <div class="contact-map-card" data-reveal>
-                <h2>Find Us Here</h2>
-                <div class="contact-map">
-                    <iframe
-                        loading="lazy"
-                        referrerpolicy="no-referrer-when-downgrade"
-                        src="<?= htmlspecialchars(MAP_EMBED_URL) ?>"
-                        allowfullscreen
-                        title="Reliable Vending Solutions location">
-                    </iframe>
+                <div class="contact-detail-row">
+                    <div class="contact-detail-icon"><?= icon('message') ?></div>
+                    <div class="contact-detail-text">
+                        <div class="contact-detail-label">WhatsApp</div>
+                        <div class="contact-detail-value"><a href="https://wa.me/<?= htmlspecialchars(preg_replace('/[^\d]/', '', CONTACT_WHATSAPP)) ?>" target="_blank" rel="noopener"><?= htmlspecialchars(CONTACT_WHATSAPP) ?></a></div>
+                    </div>
+                </div>
+                <div class="contact-detail-row">
+                    <div class="contact-detail-icon"><?= icon('mail') ?></div>
+                    <div class="contact-detail-text">
+                        <div class="contact-detail-label">Support email</div>
+                        <div class="contact-detail-value"><a href="mailto:<?= htmlspecialchars(CONTACT_EMAIL) ?>"><?= htmlspecialchars(CONTACT_EMAIL) ?></a></div>
+                    </div>
+                </div>
+                <div class="contact-detail-row">
+                    <div class="contact-detail-icon"><?= icon('clock') ?></div>
+                    <div class="contact-detail-text">
+                        <div class="contact-detail-label">Office hours</div>
+                        <div class="contact-detail-value"><?= htmlspecialchars(CONTACT_HOURS) ?></div>
+                    </div>
+                </div>
+                <div class="contact-detail-row">
+                    <div class="contact-detail-icon"><?= icon('clock') ?></div>
+                    <div class="contact-detail-text">
+                        <div class="contact-detail-label">After-hours support</div>
+                        <div class="contact-detail-value"><?= htmlspecialchars(CONTACT_AFTERHOURS) ?></div>
+                    </div>
+                </div>
+                <div class="contact-detail-row">
+                    <div class="contact-detail-icon"><?= icon('map-pin') ?></div>
+                    <div class="contact-detail-text">
+                        <div class="contact-detail-label">Address</div>
+                        <div class="contact-detail-value"><?= htmlspecialchars(CONTACT_ADDRESS) ?></div>
+                    </div>
                 </div>
             </div>
         </div>

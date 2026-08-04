@@ -1,5 +1,6 @@
 </main>
 
+<?php if (empty($hide_cta_band)): ?>
 <section class="cta-band">
     <div class="container cta-band-inner">
         <div>
@@ -8,16 +9,16 @@
         </div>
         <div class="cta-band-actions">
             <a class="btn btn-primary" href="/contact.php">Get Started</a>
-            <a class="btn btn-outline-light" href="<?= htmlspecialchars(PORTAL_LOGIN_URL) ?>" target="_blank" rel="noopener">Portal</a>
         </div>
     </div>
 </section>
+<?php endif; ?>
 
 <footer class="site-footer">
     <div class="container footer-grid">
         <div class="footer-brand">
             <div class="footer-logo">
-                <img src="/assets/images/logo-icon.png" alt="" width="32" height="27" aria-hidden="true">
+                <img src="/assets/images/logo-icon-white.png" alt="" width="32" height="32" aria-hidden="true">
                 <span class="logo-text">Reliable Vending Solutions</span>
             </div>
             <p class="footer-tagline"><?= htmlspecialchars(SITE_TAGLINE) ?></p>
@@ -46,7 +47,6 @@
             <ul>
                 <li><a href="tel:<?= htmlspecialchars(preg_replace('/[^+\d]/', '', CONTACT_PHONE)) ?>"><?= htmlspecialchars(CONTACT_PHONE) ?></a></li>
                 <li><a href="mailto:<?= htmlspecialchars(CONTACT_EMAIL) ?>"><?= htmlspecialchars(CONTACT_EMAIL) ?></a></li>
-                <li><?= htmlspecialchars(CONTACT_ADDRESS) ?></li>
             </ul>
         </div>
 
@@ -67,6 +67,7 @@
 </footer>
 
 <script src="/assets/js/animations.js"></script>
+<script src="/assets/js/hero-carousel.js"></script>
 <script src="/assets/js/main.js"></script>
 </body>
 </html>
