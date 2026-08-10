@@ -33,11 +33,11 @@
     --space-2: 0.5rem;
     --space-3: 0.75rem;
     --space-4: 1rem;
-    --space-5: 1.5rem;
-    --space-6: 2rem;
-    --space-7: 3rem;
-    --space-8: clamp(3rem, 2.4rem + 3vw, 4.5rem);
-    --space-9: clamp(4rem, 3rem + 5vw, 6rem);
+    --space-5: 1.25rem;
+    --space-6: 1.5rem;
+    --space-7: 2rem;
+    --space-8: clamp(2rem, 1.6rem + 2vw, 3rem);
+    --space-9: clamp(2.5rem, 2rem + 3vw, 4rem);
 
     /* Motion */
     --duration-fast: 150ms;
@@ -458,8 +458,8 @@ p { margin: 0 0 1em; }
    Solutions' Features / Platform capabilities living inside Main Solutions) */
 .solutions-subsection {
     max-width: 680px;
-    margin: var(--space-9) 0 var(--space-7);
-    padding-top: var(--space-7);
+    margin: var(--space-7) 0 var(--space-6);
+    padding-top: var(--space-4);
     border-top: 1px solid rgba(35,31,32,0.08);
 }
 .solutions-subsection h3 {
@@ -483,12 +483,19 @@ p { margin: 0 0 1em; }
 .card-solution-cta {
     display: inline-flex;
     align-items: center;
-    gap: 6px;
-    margin-top: 4px;
+    gap: 8px;
+    margin-top: 8px;
+    padding: 10px 18px;
+    border-radius: 999px;
+    border: 2px solid var(--color-bright-blue);
+    background: transparent;
     font-size: var(--fs-xs);
     font-weight: 700;
     color: var(--color-bright-blue);
-    transition: color var(--duration-base) var(--ease-standard);
+    transition: background-color var(--duration-base) var(--ease-standard),
+                color var(--duration-base) var(--ease-standard),
+                border-color var(--duration-base) var(--ease-standard),
+                transform var(--duration-fast) var(--ease-standard);
 }
 .card-solution-cta .icon {
     font-size: 13px;
@@ -496,10 +503,20 @@ p { margin: 0 0 1em; }
     transition: transform var(--duration-base) var(--ease-standard);
 }
 .card-solution:hover .card-solution-cta {
-    color: var(--color-white);
+    background: var(--color-white);
+    color: var(--color-deep-blue);
+    border-color: var(--color-white);
 }
 .card-solution:hover .card-solution-cta .icon {
     transform: rotate(45deg) translate(2px, -2px);
+}
+.card-solution:active .card-solution-cta {
+    transform: scale(0.96);
+}
+.card-solution:focus-visible .card-solution-cta {
+    background: var(--color-white);
+    color: var(--color-deep-blue);
+    border-color: var(--color-white);
 }
 
 /* Solution details modal — shared by all 4 Main Solutions cards */
@@ -507,6 +524,10 @@ p { margin: 0 0 1em; }
     position: fixed;
     inset: 0;
     z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
     opacity: 0;
     pointer-events: none;
     transition: opacity var(--duration-base) var(--ease-standard);
@@ -523,21 +544,20 @@ p { margin: 0 0 1em; }
 .solution-modal-panel {
     position: relative;
     z-index: 1;
-    width: min(900px, calc(100% - 48px));
-    max-height: 85vh;
+    width: min(900px, 100%);
+    max-height: calc(100vh - 48px);
     overflow-y: auto;
-    margin: 6vh auto;
     background: var(--color-white);
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow-md);
     padding: var(--space-7);
-    transform: translateY(24px) scale(0.97);
+    transform: scale(0.97);
     opacity: 0;
     transition: transform var(--duration-base) var(--ease-standard),
                 opacity var(--duration-base) var(--ease-standard);
 }
 .solution-modal.is-open .solution-modal-panel {
-    transform: translateY(0) scale(1);
+    transform: scale(1);
     opacity: 1;
 }
 .solution-modal-close {
@@ -562,6 +582,17 @@ p { margin: 0 0 1em; }
 .solution-modal-close:hover {
     background: var(--color-bright-blue);
     color: var(--color-white);
+}
+/* Image-only modal — the whole panel is one designed graphic, no HTML
+   text/cards at all; the close button floats on top of it. */
+.solution-modal-panel-image {
+    padding: 0;
+}
+.solution-modal-panel-image img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: var(--radius-lg);
 }
 .solution-modal-header {
     max-width: 680px;
@@ -615,6 +646,67 @@ p { margin: 0 0 1em; }
 .card-grid > .card {
     flex: 1 1 260px;
     max-width: 340px;
+}
+
+/* Card scroll — a horizontally scrollable row instead of wrapping, for
+   sets with too many cards to comfortably grid (e.g. Corporate & Bulk
+   Vending's 7 audience cards). Snaps card-by-card; the prev/next buttons
+   drive it, so the native scrollbar is hidden rather than shown. */
+.card-scroll-wrap {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+}
+.card-scroll {
+    display: flex;
+    flex: 1;
+    min-width: 0;
+    gap: var(--space-5);
+    overflow-x: auto;
+    scroll-snap-type: x proximity;
+    padding: 8px 2px var(--space-4);
+    scrollbar-width: none;
+}
+.card-scroll::-webkit-scrollbar {
+    display: none;
+}
+.card-scroll > .card {
+    flex: 0 0 300px;
+    max-width: 320px;
+    scroll-snap-align: start;
+}
+.card-scroll-nav {
+    flex-shrink: 0;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: 1px solid rgba(35,31,32,0.12);
+    background: var(--color-white);
+    color: var(--color-deep-blue);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    cursor: pointer;
+    box-shadow: var(--shadow-sm);
+    transition: background-color var(--duration-base) var(--ease-standard),
+                color var(--duration-base) var(--ease-standard);
+}
+.card-scroll-nav:hover {
+    background: var(--color-bright-blue);
+    color: var(--color-white);
+    border-color: transparent;
+}
+.card-scroll-nav:disabled {
+    opacity: 0.35;
+    cursor: default;
+    pointer-events: none;
+}
+@media (max-width: 640px) {
+    .card-scroll-nav { display: none; }
+}
+@media (max-width: 480px) {
+    .card-scroll > .card { flex-basis: 260px; }
 }
 
 /* Partner showcase cards (partners page utility/municipal partners) — wider
@@ -705,7 +797,7 @@ p { margin: 0 0 1em; }
     row-gap: 12px;
     background: var(--color-white);
     border-radius: var(--radius-md);
-    padding: 28px;
+    padding: 22px;
     box-shadow: var(--shadow-card);
     border: 1px solid rgba(35,31,32,0.06);
     text-align: left;
@@ -962,10 +1054,6 @@ p { margin: 0 0 1em; }
     margin-top: var(--space-7);
     text-align: center;
 }
-.highlight-cta-card {
-    text-align: center;
-}
-.highlight-cta-card .eyebrow { display: block; }
 .icon {
     width: 1em;
     height: 1em;
@@ -1105,7 +1193,7 @@ p { margin: 0 0 1em; }
     display: flex;
     align-items: center;
     gap: 28px;
-    padding: 26px 20px;
+    padding: 16px 20px;
     border-bottom: 1px solid rgba(0,82,136,0.14);
     border-radius: var(--radius-md);
     transition: background-color var(--duration-base) var(--ease-standard),
