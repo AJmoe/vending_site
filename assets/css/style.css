@@ -337,17 +337,6 @@ p { margin: 0 0 1em; }
     opacity: 0.85;
 }
 
-.hero {
-    color: var(--color-white);
-}
-.hero h1 {
-    color: var(--color-white);
-    font-size: var(--fs-2xl);
-}
-.hero p.lead {
-    font-size: 1.1rem;
-    color: rgba(255,255,255,0.88);
-}
 .hero-actions {
     display: flex;
     gap: 16px;
@@ -357,16 +346,14 @@ p { margin: 0 0 1em; }
 /* Hero carousel */
 .hero-carousel {
     position: relative;
+    width: 100%;
+    aspect-ratio: 1717 / 654;
     overflow: hidden;
-    min-height: clamp(480px, 58vw, 620px);
+    background: var(--color-ink);
 }
 .hero-slide {
     position: absolute;
     inset: 0;
-    display: flex;
-    align-items: center;
-    background-size: cover;
-    background-position: center;
     opacity: 0;
     pointer-events: none;
     transition: opacity var(--duration-slow) var(--ease-standard);
@@ -375,6 +362,12 @@ p { margin: 0 0 1em; }
     opacity: 1;
     pointer-events: auto;
     z-index: 1;
+}
+.hero-slide img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
 }
 @media (prefers-reduced-motion: reduce) {
     .hero-slide { transition: none; }
@@ -733,11 +726,196 @@ p { margin: 0 0 1em; }
     color: var(--color-white);
 }
 
+/* Two-image crossfade for a logo that needs a different version at rest
+   (on the card's white background) vs on hover (card inverts to a dark
+   background, per .card:hover) — e.g. Leeroy Systems: a dark-on-white mark
+   by default, swapping to the white-on-transparent mark on hover. No chip
+   or background box needed either way since each version already matches
+   its own background. */
+.partner-logo-swap {
+    position: relative;
+    display: block;
+    width: 140px;
+    height: 40px;
+    margin-bottom: var(--space-4);
+}
+.partner-showcase .card .partner-logo-swap .partner-logo {
+    position: absolute;
+    inset: 0;
+    max-height: none;
+    object-position: center center;
+    transition: opacity var(--duration-base) var(--ease-standard),
+                transform var(--duration-slow) var(--ease-standard);
+}
+/* Default (rest) mark: same 140x40 footprint as the plain .partner-logo
+   (e.g. WUC) — no cropping, shown whole like every other partner logo */
+.partner-logo-swap .partner-logo-default {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    object-fit: contain;
+}
+/* Hover mark: same footprint, centered within the wrapper via auto margins
+   on all sides (inset:0 + fixed width/height + margin:auto) — shown whole */
+.partner-logo-swap .partner-logo-hover {
+    width: 140px;
+    height: 40px;
+    margin: auto;
+    object-fit: contain;
+    opacity: 0;
+}
+.partner-card-expand:hover .partner-logo-swap .partner-logo-default,
+.partner-card-expand:focus-within .partner-logo-swap .partner-logo-default,
+.partner-card-expand.is-open .partner-logo-swap .partner-logo-default {
+    opacity: 0;
+}
+.partner-card-expand:hover .partner-logo-swap .partner-logo-hover,
+.partner-card-expand:focus-within .partner-logo-swap .partner-logo-hover,
+.partner-card-expand.is-open .partner-logo-swap .partner-logo-hover {
+    opacity: 1;
+}
+.partner-showcase .card:hover .partner-logo-swap {
+    margin-left: auto;
+    margin-right: auto;
+    transform: scale(1.35);
+}
+.partner-showcase .card:hover .partner-logo-swap .partner-logo-hover {
+    transform: none;
+}
+
+/* Partner card drop-down: logo and title always show; the description
+   reveals on hover, keyboard focus, or a tap-to-toggle .is-open class */
+.partner-card-expand .partner-card-desc {
+    display: grid;
+    grid-template-rows: 0fr;
+    overflow: hidden;
+    transition: grid-template-rows var(--duration-base) var(--ease-standard);
+}
+.partner-card-expand .partner-card-desc p {
+    overflow: hidden;
+    min-height: 0;
+    margin: 0;
+}
+.partner-card-expand:hover .partner-card-desc,
+.partner-card-expand:focus-within .partner-card-desc,
+.partner-card-expand.is-open .partner-card-desc {
+    grid-template-rows: 1fr;
+    margin-top: 8px;
+}
+
 /* Plain vertical card stack (no card-grid parent) — e.g. About's Mission/Vision pair */
 .card-stack-plain {
     display: flex;
     flex-direction: column;
     gap: var(--space-5);
+}
+
+/* About page: full-width story card sitting above the
+   Mission+Vision / Core Values row — plain, no hover interaction
+   (it's static text, not a clickable/actionable card) */
+.about-story-card {
+    margin-bottom: var(--space-7);
+}
+.about-story-card h2 {
+    flex-basis: 100%;
+}
+.about-story-card:hover {
+    background: var(--color-white);
+    border-color: rgba(35,31,32,0.06);
+    box-shadow: var(--shadow-card);
+    transform: none;
+    text-align: left;
+}
+.about-story-card:hover p {
+    color: var(--color-grey);
+}
+
+/* STS Association logo, standing in for the old feature-media image in the
+   Compliance section — sized to roughly match the paragraph column beside it */
+.about-sts-logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 220px;
+    background: var(--color-white);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-card);
+    padding: var(--space-6);
+    transition: box-shadow var(--duration-base) var(--ease-standard),
+                transform var(--duration-base) var(--ease-standard);
+}
+.about-sts-logo:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateY(-4px);
+}
+.about-sts-logo img {
+    max-width: 100%;
+    max-height: 200px;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    display: block;
+}
+
+/* Soft container "envelope" grouping the Mission + Vision cards — plain
+   (no hover invert of its own), just a backdrop distinguishing the group
+   from the Core Values column beside it */
+.card-group {
+    background: var(--color-light-blue);
+    border-radius: var(--radius-lg);
+    padding: var(--space-5);
+}
+
+/* Mission+Vision and Core Values stretch to match heights, so the bottom
+   of the (shorter, collapsed) Core Values list lines up with the bottom
+   of the Mission+Vision group instead of leaving it short. */
+.about-values-row {
+    align-items: stretch;
+}
+.about-values-col {
+    display: flex;
+    flex-direction: column;
+}
+.about-values-col .value-list {
+    flex: 1;
+    justify-content: space-between;
+}
+
+/* Compact value-list — same design as the full-width Core Values list,
+   scaled down to fit a narrower two-col column (reuses the mobile sizing) */
+.value-list-compact .value-row {
+    gap: 16px;
+    padding: 14px 8px;
+}
+.value-list-compact .value-index {
+    width: 40px;
+    font-size: 1.6rem;
+}
+.value-list-compact .value-icon {
+    width: 44px;
+    height: 44px;
+    font-size: 20px;
+}
+
+/* Value row drop-down: number, icon and title always show on one line;
+   the explanation is collapsed and reveals on hover, keyboard focus, or a
+   tap-to-toggle .is-open class (for touch devices, added by main.js). */
+.value-row-expand .value-desc {
+    display: grid;
+    grid-template-rows: 0fr;
+    overflow: hidden;
+    transition: grid-template-rows var(--duration-base) var(--ease-standard);
+}
+.value-row-expand .value-desc p {
+    overflow: hidden;
+    min-height: 0;
+    margin: 0;
+}
+.value-row-expand:hover .value-desc,
+.value-row-expand:focus-within .value-desc,
+.value-row-expand.is-open .value-desc {
+    grid-template-rows: 1fr;
+    margin-top: 4px;
 }
 
 /* Card stack — pairs two short cards vertically so they occupy one slot in
@@ -854,13 +1032,34 @@ p { margin: 0 0 1em; }
     margin-bottom: var(--space-4);
 }
 
-/* Partner logo strip (partners page) — horizontal row, spins on hover */
-.partner-strip {
+/* Partner logo marquee — continuous horizontal scroll, pauses on hover, each tile still spins on its own hover */
+.partner-marquee {
+    overflow: hidden;
+    -webkit-mask-image: linear-gradient(90deg, transparent, black 6%, black 94%, transparent);
+    mask-image: linear-gradient(90deg, transparent, black 6%, black 94%, transparent);
+}
+.partner-marquee-track {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
     align-items: stretch;
     gap: var(--space-5);
+    width: max-content;
+    animation: partner-marquee-scroll 32s linear infinite;
+}
+.partner-marquee:hover .partner-marquee-track,
+.partner-marquee:focus-within .partner-marquee-track {
+    animation-play-state: paused;
+}
+@keyframes partner-marquee-scroll {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+}
+@media (prefers-reduced-motion: reduce) {
+    .partner-marquee-track {
+        animation: none;
+    }
+    .partner-marquee {
+        overflow-x: auto;
+    }
 }
 .partner-tile {
     display: flex;
@@ -1289,7 +1488,7 @@ p { margin: 0 0 1em; }
 .two-col {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: var(--space-7);
+    gap: var(--space-6);
     align-items: start;
 }
 @media (max-width: 860px) {
@@ -1730,10 +1929,6 @@ p { margin: 0 0 1em; }
     .stats-grid {
         gap: var(--space-6);
     }
-}
-
-@media (max-width: 640px) {
-    .hero-carousel { min-height: 560px; }
 }
 
 /* Card flip/reveal — front face (icon+heading) swaps for the description on

@@ -24,4 +24,16 @@ document.addEventListener('DOMContentLoaded', function () {
             card.classList.toggle('is-open');
         });
     });
+
+    document.querySelectorAll('.value-row-expand').forEach(function (row) {
+        row.addEventListener('click', function () {
+            row.classList.toggle('is-open');
+        });
+    });
+
+    document.querySelectorAll('.partner-card-expand').forEach(function (card) {
+        card.addEventListener('click', function () {
+            card.classList.toggle('is-open');
+        });
+    });
 });

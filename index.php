@@ -5,14 +5,24 @@ require __DIR__ . '/includes/header.php';
 ?>
 
 <!--
-    Hero carousel: 3 placeholder marketing images used as temporary slides.
-    Text is baked directly into the banner images (no site-rendered overlay
-    text) — swap the background-image URLs below when new banners are ready.
+    Hero carousel: real <img> elements, not CSS backgrounds. The wrapper's
+    aspect-ratio is locked to the primary banner's actual pixel dimensions
+    (1717x654) so the box is the same shape at every screen size, and each
+    image uses object-fit:contain so it's always shown whole, never cropped.
+    Text is baked directly into the banner images — swap the src/alt below
+    when new banners are ready (update the aspect-ratio too if a new primary
+    banner's own pixel dimensions differ from 1717x654).
 -->
-<section class="hero hero-carousel" data-carousel aria-roledescription="carousel" aria-label="Highlights">
-    <div class="hero-slide is-active" data-slide style="background-image:url('/assets/images/banner-vending-1.png')"></div>
-    <div class="hero-slide" data-slide style="background-image:url('/assets/images/sts-compliance.png')"></div>
-    <div class="hero-slide" data-slide style="background-image:url('/assets/images/partners-handshake.png')"></div>
+<section class="hero-carousel" data-carousel aria-roledescription="carousel" aria-label="Highlights">
+    <div class="hero-slide is-active" data-slide>
+        <img src="/assets/images/hero-1.png" alt="Reliable Vending Solutions — reliable solutions, every time, everywhere. End-to-end vending solutions that power everyday convenience.">
+    </div>
+    <div class="hero-slide" data-slide>
+        <img src="/assets/images/sts-compliance.png" alt="Reliable Vending Solutions is S.T.S Compliant — we carry the STS standard, future-proof, compliant and always up to date.">
+    </div>
+    <div class="hero-slide" data-slide>
+        <img src="/assets/images/partners-handshake.png" alt="Together, we vend smarter — reliable partnerships, reliable vending.">
+    </div>
 
     <div class="hero-carousel-footer">
         <div class="container">
@@ -51,7 +61,7 @@ require __DIR__ . '/includes/header.php';
             <span class="eyebrow">What we do</span>
             <h2>One platform for every stage of prepaid vending</h2>
         </div>
-        <div class="card-grid" data-reveal-stagger>
+        <div class="card-grid" data-reveal-stagger> 
             <div class="card card-flip" data-reveal tabindex="0">
                 <div class="card-face">
                     <div class="icon-badge"><?= icon('shield') ?></div>
