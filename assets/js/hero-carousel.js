@@ -4,6 +4,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
     var slides = Array.prototype.slice.call(carousel.querySelectorAll('[data-slide]'));
     var dots = Array.prototype.slice.call(carousel.querySelectorAll('.hero-dot'));
+    var prevBtn = carousel.querySelector('[data-carousel-prev]');
+    var nextBtn = carousel.querySelector('[data-carousel-next]');
     if (slides.length < 2) return;
 
     var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -29,6 +31,10 @@ document.addEventListener('DOMContentLoaded', function () {
         show(current + 1);
     }
 
+    function prev() {
+        show(current - 1);
+    }
+
     function start() {
         if (prefersReduced) return;
         stop();
@@ -48,6 +54,19 @@ document.addEventListener('DOMContentLoaded', function () {
             start();
         });
     });
+
+    if (prevBtn) {
+        prevBtn.addEventListener('click', function () {
+            prev();
+            start();
+        });
+    }
+    if (nextBtn) {
+        nextBtn.addEventListener('click', function () {
+            next();
+            start();
+        });
+    }
 
     carousel.addEventListener('mouseenter', stop);
     carousel.addEventListener('mouseleave', start);

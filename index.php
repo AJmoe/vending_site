@@ -15,14 +15,21 @@ require __DIR__ . '/includes/header.php';
 -->
 <section class="hero-carousel" data-carousel aria-roledescription="carousel" aria-label="Highlights">
     <div class="hero-slide is-active" data-slide>
-        <img src="/assets/images/hero-1.png" alt="Reliable Vending Solutions — reliable solutions, every time, everywhere. End-to-end vending solutions that power everyday convenience.">
+        <img src="/assets/images/hero-banner-1.png" alt="We are reliable by name and by nature. We deliver secure, STS-compliant prepaid tokens for electricity, water, gas and time — with zero setup costs and complete meter independence. Independently assessed across all four utility types. No lock-in. No hidden costs. Just reliable vending.">
     </div>
     <div class="hero-slide" data-slide>
-        <img src="/assets/images/sts-compliance.png" alt="Reliable Vending Solutions is S.T.S Compliant — we carry the STS standard, future-proof, compliant and always up to date.">
+        <img src="/assets/images/hero-banner-2.png" alt="STS Compliant. Globally trusted. Built on the global Standard Transfer Specification, our platform delivers secure, interoperable tokens that meet the highest industry standards. Certified. Future-proof. Trusted worldwide.">
     </div>
     <div class="hero-slide" data-slide>
-        <img src="/assets/images/partners-handshake.png" alt="Together, we vend smarter — reliable partnerships, reliable vending.">
+        <img src="/assets/images/hero-banner-3.png" alt="Together, we vend smarter. We partner with utilities and service providers, handling the technology so you can focus on your customers. From secure token generation to seamless delivery, we make prepaid vending simple, scalable and future-ready.">
     </div>
+
+    <button type="button" class="hero-nav hero-nav-prev" data-carousel-prev aria-label="Previous slide">
+        <?= icon('chevron-left') ?>
+    </button>
+    <button type="button" class="hero-nav hero-nav-next" data-carousel-next aria-label="Next slide">
+        <?= icon('chevron-right') ?>
+    </button>
 
     <div class="hero-carousel-footer">
         <div class="container">
