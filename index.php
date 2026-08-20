@@ -5,23 +5,49 @@ require __DIR__ . '/includes/header.php';
 ?>
 
 <!--
-    Hero carousel: real <img> elements, not CSS backgrounds. The wrapper's
-    aspect-ratio is locked to the primary banner's actual pixel dimensions
-    (1717x654) so the box is the same shape at every screen size, and each
-    image uses object-fit:contain so it's always shown whole, never cropped.
-    Text is baked directly into the banner images — swap the src/alt below
-    when new banners are ready (update the aspect-ratio too if a new primary
-    banner's own pixel dimensions differ from 1717x654).
+    Hero carousel: real <img> elements, not CSS backgrounds. The banners are
+    text-free photography — object-fit:cover fills the box edge-to-edge
+    (cropping as needed for a clean full-bleed look at every screen size)
+    while the headline/copy is real HTML laid over a white-fade scrim, so
+    the text is never cropped or shrunk along with the photo, and it's
+    readable to screen readers directly (images are decorative, alt="").
 -->
 <section class="hero-carousel" data-carousel aria-roledescription="carousel" aria-label="Highlights">
     <div class="hero-slide is-active" data-slide>
-        <img src="/assets/images/hero-banner-1.png" alt="We are reliable by name and by nature. We deliver secure, STS-compliant prepaid tokens for electricity, water, gas and time — with zero setup costs and complete meter independence. Independently assessed across all four utility types. No lock-in. No hidden costs. Just reliable vending.">
+        <img src="/assets/images/hero-banner-1.png" alt="">
+        <div class="hero-slide-scrim"></div>
+        <div class="hero-slide-content">
+            <div class="container">
+                <div class="hero-slide-text">
+                    <h2>We are <span class="hero-slide-highlight">reliable</span> by name and by nature.</h2>
+                    <p>We deliver <strong>secure, STS-compliant</strong> prepaid tokens for electricity, water, gas and time — with <strong>zero setup costs</strong> and <strong>complete meter independence</strong>. Independently assessed across all four utility types. No lock-in. No hidden costs. <strong>Just reliable vending.</strong></p>
+                </div>
+            </div>
+        </div>
     </div>
     <div class="hero-slide" data-slide>
-        <img src="/assets/images/hero-banner-2.png" alt="STS Compliant. Globally trusted. Built on the global Standard Transfer Specification, our platform delivers secure, interoperable tokens that meet the highest industry standards. Certified. Future-proof. Trusted worldwide.">
+        <img src="/assets/images/hero-banner-2.png" alt="">
+        <div class="hero-slide-scrim"></div>
+        <div class="hero-slide-content">
+            <div class="container">
+                <div class="hero-slide-text">
+                    <h2>STS <span class="hero-slide-highlight">Compliant</span>. Globally trusted.</h2>
+                    <p>Built on the global <strong>Standard Transfer Specification</strong>, our platform delivers <strong>secure, interoperable tokens</strong> that meet the highest industry standards. <strong>Certified. Future-proof. Trusted worldwide.</strong></p>
+                </div>
+            </div>
+        </div>
     </div>
     <div class="hero-slide" data-slide>
-        <img src="/assets/images/hero-banner-3.png" alt="Together, we vend smarter. We partner with utilities and service providers, handling the technology so you can focus on your customers. From secure token generation to seamless delivery, we make prepaid vending simple, scalable and future-ready.">
+        <img src="/assets/images/hero-banner-3.png" alt="">
+        <div class="hero-slide-scrim"></div>
+        <div class="hero-slide-content">
+            <div class="container">
+                <div class="hero-slide-text">
+                    <h2>Together, we <span class="hero-slide-highlight">vend</span> smarter.</h2>
+                    <p>We partner with <strong>utilities</strong> and <strong>service providers</strong>, handling the technology so you can focus on your customers. From <strong>secure token generation</strong> to <strong>seamless delivery</strong>, we make prepaid vending simple, scalable and future-ready.</p>
+                </div>
+            </div>
+        </div>
     </div>
 
     <button type="button" class="hero-nav hero-nav-prev" data-carousel-prev aria-label="Previous slide">
