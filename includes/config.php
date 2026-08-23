@@ -15,7 +15,7 @@ const CONTACT_WHATSAPP    = '(+267) 72 818 205';
 const CONTACT_EMAIL       = 'info@reliablevending.co.bw';
 const CONTACT_SALES_EMAIL = 'babishn@reliablevending.co.bw';
 const CONTACT_HOURS       = 'Monday – Friday, 08:00 – 17:00';
-const CONTACT_ADDRESS     = 'To be confirmed, Botswana';
+const CONTACT_ADDRESS     = 'Plot 176, Gaborone International Commerce Park, Gaborone, Botswana';
 const CONTACT_AFTERHOURS  = 'For urgent technical support, call (+267) 72 818 205.';
 
 const COMPANY_LEGAL_NAME = 'Reliable Vending Solutions (Pty) Ltd';
