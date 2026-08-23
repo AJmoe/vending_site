@@ -21,37 +21,61 @@ require __DIR__ . '/includes/header.php';
         </div>
         <p class="text-grey solutions-intro">Open a solution to explore its own features and platform capabilities.</p>
         <div class="card-grid card-grid-simple" data-reveal-stagger>
-            <button type="button" class="card card-solution" data-reveal data-modal-target="modal-water">
+            <button type="button" class="card card-solution card-solution-media" data-reveal data-modal-target="modal-water">
+                <img class="card-solution-bg" src="/assets/images/solution-water-meter-laison.jpg" alt="">
+                <div class="card-solution-scrim"></div>
                 <div class="card-header-row">
                     <div class="icon-badge"><?= icon('droplet') ?></div>
                     <h3>Water</h3>
                 </div>
-                <p>Prepaid water tokens for households, estates and municipalities, dispensed instantly and securely.</p>
-                <span class="card-solution-cta">Explore more <?= icon('trending-up') ?></span>
+                <div class="card-solution-reveal">
+                    <div>
+                        <p>Prepaid water tokens for households, estates and municipalities, dispensed instantly and securely.</p>
+                        <span class="card-solution-cta">Explore more <?= icon('trending-up') ?></span>
+                    </div>
+                </div>
             </button>
-            <button type="button" class="card card-solution" data-reveal data-modal-target="modal-electricity">
+            <button type="button" class="card card-solution card-solution-media" data-reveal data-modal-target="modal-electricity">
+                <img class="card-solution-bg" src="/assets/images/solution-electricity-customer.jpg" alt="">
+                <div class="card-solution-scrim"></div>
                 <div class="card-header-row">
                     <div class="icon-badge"><?= icon('bolt') ?></div>
                     <h3>Electricity</h3>
                 </div>
-                <p>STS-compliant electricity tokens delivered in real time across every vending channel.</p>
-                <span class="card-solution-cta">Explore more <?= icon('trending-up') ?></span>
+                <div class="card-solution-reveal">
+                    <div>
+                        <p>STS-compliant electricity tokens delivered in real time across every vending channel.</p>
+                        <span class="card-solution-cta">Explore more <?= icon('trending-up') ?></span>
+                    </div>
+                </div>
             </button>
-            <button type="button" class="card card-solution" data-reveal data-modal-target="modal-gas">
+            <button type="button" class="card card-solution card-solution-media" data-reveal data-modal-target="modal-gas">
+                <img class="card-solution-bg" src="/assets/images/solution-gas-meter-secure.jpg" alt="">
+                <div class="card-solution-scrim"></div>
                 <div class="card-header-row">
                     <div class="icon-badge"><?= icon('flame') ?></div>
                     <h3>Gas</h3>
                 </div>
-                <p>Prepaid gas tokens for residential and commercial customers, vended the same reliable way.</p>
-                <span class="card-solution-cta">Explore more <?= icon('trending-up') ?></span>
+                <div class="card-solution-reveal">
+                    <div>
+                        <p>Prepaid gas tokens for residential and commercial customers, vended the same reliable way.</p>
+                        <span class="card-solution-cta">Explore more <?= icon('trending-up') ?></span>
+                    </div>
+                </div>
             </button>
-            <button type="button" class="card card-solution" data-reveal data-modal-target="modal-time">
+            <button type="button" class="card card-solution card-solution-media" data-reveal data-modal-target="modal-time">
+                <img class="card-solution-bg" src="/assets/images/solution-time-box-laundry.jpg" alt="">
+                <div class="card-solution-scrim"></div>
                 <div class="card-header-row">
                     <div class="icon-badge"><?= icon('clock') ?></div>
                     <h3>Time</h3>
                 </div>
-                <p>Token-activated timers for shared equipment — pay only for the time you use.</p>
-                <span class="card-solution-cta">Explore more <?= icon('trending-up') ?></span>
+                <div class="card-solution-reveal">
+                    <div>
+                        <p>Token-activated timers for shared equipment — pay only for the time you use.</p>
+                        <span class="card-solution-cta">Explore more <?= icon('trending-up') ?></span>
+                    </div>
+                </div>
             </button>
         </div>
     </div>

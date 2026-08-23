@@ -70,8 +70,9 @@ require __DIR__ . '/includes/header.php';
 </section>
 
 <section class="section section-tight">
-    <div class="container">
-        <div class="contact-form-card contact-form-card-wide" data-reveal>
+    <div class="container contact-info-grid" data-reveal-stagger>
+        <div class="contact-form-card" data-reveal>
+            <span class="eyebrow">Send a Message</span>
             <h2>Send an Enquiry</h2>
 
             <?php if ($success): ?>
@@ -117,17 +118,14 @@ require __DIR__ . '/includes/header.php';
                 </div>
                 <div class="form-field">
                     <label for="message">Message</label>
-                    <textarea id="message" name="message" rows="4" required><?= htmlspecialchars($message) ?></textarea>
+                    <textarea id="message" name="message" rows="3" required><?= htmlspecialchars($message) ?></textarea>
                 </div>
                 <button type="submit" class="btn btn-primary btn-block">Send Enquiry</button>
             </form>
         </div>
-    </div>
-</section>
 
-<section class="section section-tight section-alt">
-    <div class="container">
-        <div class="contact-details-card contact-details-card-standalone" data-reveal>
+        <div class="contact-details-card" data-reveal>
+            <span class="eyebrow">Reach Us</span>
             <h2>Contact Details</h2>
             <div class="contact-detail-list">
                 <div class="contact-detail-row">

@@ -63,6 +63,7 @@
 
     <div class="container footer-bottom">
         <p>&copy; <?= date('Y') ?> <?= htmlspecialchars(COMPANY_LEGAL_NAME) ?>. All rights reserved.</p>
+        <p class="footer-credit"><a href="https://ajmoe.github.io/Nexora-Synth/" target="_blank" rel="noopener">Website By Nexora Synth</a></p>
     </div>
 </footer>
 
