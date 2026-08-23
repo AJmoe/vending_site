@@ -577,16 +577,18 @@ p { margin: 0 0 1em; }
     align-items: center;
     gap: 8px;
     margin-top: 8px;
-    padding: 10px 18px;
+    padding: 10px 20px;
     border-radius: 999px;
     border: 2px solid var(--color-bright-blue);
-    background: transparent;
-    font-size: var(--fs-xs);
+    background: var(--color-light-blue);
+    box-shadow: var(--shadow-sm);
+    font-size: var(--fs-sm);
     font-weight: 700;
-    color: var(--color-bright-blue);
+    color: var(--color-deep-blue);
     transition: background-color var(--duration-base) var(--ease-standard),
                 color var(--duration-base) var(--ease-standard),
                 border-color var(--duration-base) var(--ease-standard),
+                box-shadow var(--duration-base) var(--ease-standard),
                 transform var(--duration-fast) var(--ease-standard);
 }
 .card-solution-cta .icon {
@@ -594,21 +596,21 @@ p { margin: 0 0 1em; }
     transform: rotate(45deg);
     transition: transform var(--duration-base) var(--ease-standard);
 }
-.card-solution:hover .card-solution-cta {
-    background: var(--color-white);
-    color: var(--color-deep-blue);
-    border-color: var(--color-white);
-}
-.card-solution:hover .card-solution-cta .icon {
-    transform: rotate(45deg) translate(2px, -2px);
-}
-.card-solution:active .card-solution-cta {
-    transform: scale(0.96);
-}
+.card-solution:hover .card-solution-cta,
 .card-solution:focus-visible .card-solution-cta {
     background: var(--color-white);
     color: var(--color-deep-blue);
     border-color: var(--color-white);
+    box-shadow: 0 10px 24px rgba(0,0,0,0.2);
+    transform: translateY(-3px);
+}
+.card-solution:hover .card-solution-cta .icon,
+.card-solution:focus-visible .card-solution-cta .icon {
+    transform: rotate(45deg) translate(4px, -4px);
+}
+.card-solution:active .card-solution-cta {
+    box-shadow: none;
+    transform: translateY(0) scale(0.96);
 }
 
 /* Solution details modal — shared by all 4 Main Solutions cards */
@@ -693,6 +695,79 @@ p { margin: 0 0 1em; }
 .solution-modal-header h2 {
     font-size: var(--fs-lg);
     letter-spacing: -0.01em;
+}
+
+/* Split-panel modal — real HTML text alongside product/hardware photography,
+   for solutions whose imagery is product shots (e.g. Water's meter
+   hardware) rather than a full-bleed lifestyle banner */
+.solution-modal-panel-split {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: var(--space-7);
+    align-items: center;
+}
+.solution-modal-content h2 {
+    font-size: var(--fs-lg);
+    letter-spacing: -0.01em;
+    margin-top: var(--space-2);
+}
+.solution-modal-media-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-4);
+}
+.solution-modal-media-grid img {
+    width: 100%;
+    height: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: contain;
+    background: var(--color-light-blue);
+    border-radius: var(--radius-md);
+    padding: var(--space-4);
+}
+.solution-modal-media-grid img:first-child {
+    grid-column: 1 / -1;
+    aspect-ratio: 16 / 10;
+}
+/* A real lifestyle/action photo (own background, not a white product
+   shot) — fills its tile edge-to-edge instead of the light-blue,
+   padded, contain treatment used for hardware product shots */
+.solution-modal-media-grid img.solution-media-photo {
+    object-fit: cover;
+    object-position: center 20%;
+    background: none;
+    padding: 0;
+}
+.solution-modal-features {
+    margin: var(--space-5) 0 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+}
+.solution-modal-features li {
+    padding-left: var(--space-5);
+    position: relative;
+    color: var(--color-grey);
+}
+.solution-modal-features li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.5em;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--color-bright-blue);
+}
+.solution-modal-features strong {
+    color: var(--color-ink);
+}
+@media (max-width: 720px) {
+    .solution-modal-panel-split {
+        grid-template-columns: 1fr;
+    }
 }
 .solution-modal .solutions-subsection {
     margin-top: var(--space-7);

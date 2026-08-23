@@ -1,6 +1,6 @@
 <?php
 $page_title = 'Solutions';
-$page_description = 'Prepaid water, electricity, gas and airtime vending from Reliable Vending Solutions — one STS-compliant platform for every utility.';
+$page_description = 'Prepaid water, electricity, gas and time-based token vending from Reliable Vending Solutions — one STS-compliant platform for every utility.';
 $hide_cta_band = true; // page already ends with its own "Get Last Tokens" CTA
 require __DIR__ . '/includes/header.php';
 ?>
@@ -27,7 +27,7 @@ require __DIR__ . '/includes/header.php';
                     <h3>Water</h3>
                 </div>
                 <p>Prepaid water tokens for households, estates and municipalities, dispensed instantly and securely.</p>
-                <span class="card-solution-cta">Explore features &amp; capabilities <?= icon('trending-up') ?></span>
+                <span class="card-solution-cta">Explore more <?= icon('trending-up') ?></span>
             </button>
             <button type="button" class="card card-solution" data-reveal data-modal-target="modal-electricity">
                 <div class="card-header-row">
@@ -35,7 +35,7 @@ require __DIR__ . '/includes/header.php';
                     <h3>Electricity</h3>
                 </div>
                 <p>STS-compliant electricity tokens delivered in real time across every vending channel.</p>
-                <span class="card-solution-cta">Explore features &amp; capabilities <?= icon('trending-up') ?></span>
+                <span class="card-solution-cta">Explore more <?= icon('trending-up') ?></span>
             </button>
             <button type="button" class="card card-solution" data-reveal data-modal-target="modal-gas">
                 <div class="card-header-row">
@@ -43,15 +43,15 @@ require __DIR__ . '/includes/header.php';
                     <h3>Gas</h3>
                 </div>
                 <p>Prepaid gas tokens for residential and commercial customers, vended the same reliable way.</p>
-                <span class="card-solution-cta">Explore features &amp; capabilities <?= icon('trending-up') ?></span>
+                <span class="card-solution-cta">Explore more <?= icon('trending-up') ?></span>
             </button>
-            <button type="button" class="card card-solution" data-reveal data-modal-target="modal-airtime">
+            <button type="button" class="card card-solution" data-reveal data-modal-target="modal-time">
                 <div class="card-header-row">
-                    <div class="icon-badge"><?= icon('signal') ?></div>
-                    <h3>Airtime</h3>
+                    <div class="icon-badge"><?= icon('clock') ?></div>
+                    <h3>Time</h3>
                 </div>
-                <p>Mobile airtime top-ups alongside your utility tokens, all through one platform.</p>
-                <span class="card-solution-cta">Explore features &amp; capabilities <?= icon('trending-up') ?></span>
+                <p>Token-activated timers for shared equipment — pay only for the time you use.</p>
+                <span class="card-solution-cta">Explore more <?= icon('trending-up') ?></span>
             </button>
         </div>
     </div>
@@ -65,37 +65,92 @@ require __DIR__ . '/includes/header.php';
 -->
 <div class="solution-modal" id="modal-water" aria-hidden="true">
     <div class="solution-modal-backdrop" data-modal-close></div>
-    <div class="solution-modal-panel solution-modal-panel-image" role="dialog" aria-modal="true" aria-labelledby="modal-water-title">
+    <div class="solution-modal-panel solution-modal-panel-split" role="dialog" aria-modal="true" aria-labelledby="modal-water-title">
         <button type="button" class="solution-modal-close" data-modal-close aria-label="Close">&times;</button>
-        <h2 id="modal-water-title" class="sr-only">Water — features &amp; platform capabilities</h2>
-        <img src="/assets/images/solution-water.png" alt="Water: prepaid water tokens for households, estates and municipalities, dispensed instantly and securely. STS Compliance: fully STS compliant token generation and delivery. Meter Compatibility: freedom to choose your preferred hardware supplier, compatible with Lesira, SH Meters, Conlog, Honeywell and Liaison. What's Included: no hassles around technology upgrades, TID rollover or licence costs.">
+        <div class="solution-modal-content">
+            <span class="eyebrow">Water</span>
+            <h2 id="modal-water-title">Prepaid water tokens, dispensed instantly and securely</h2>
+            <p class="text-grey">Water tokens for households, estates and municipalities — generated and delivered the moment payment clears.</p>
+            <ul class="solution-modal-features">
+                <li><strong>STS Compliance</strong> — fully STS-compliant token generation and delivery, every time.</li>
+                <li><strong>Meter Compatibility</strong> — freedom to choose your preferred hardware supplier, compatible with Lesira, SH Meters, Conlog, Honeywell and Liaison.</li>
+                <li><strong>What's Included</strong> — no hassles around technology upgrades, TID rollover or licence costs.</li>
+            </ul>
+        </div>
+        <div class="solution-modal-media-grid">
+            <img src="/assets/images/solution-water-meter-laison.jpg" alt="Laison prepaid smart water meter (LoRa) with its wireless keypad token reader">
+            <img src="/assets/images/solution-water-meter-lesira.jpg" alt="Lesira prepaid water meter keypad token reader (KP CIU)">
+            <img src="/assets/images/solution-water-meter-shmeters.jpg" alt="SH Meters prepaid water meter and keypad token reader">
+        </div>
     </div>
 </div>
 
 <div class="solution-modal" id="modal-electricity" aria-hidden="true">
     <div class="solution-modal-backdrop" data-modal-close></div>
-    <div class="solution-modal-panel solution-modal-panel-image" role="dialog" aria-modal="true" aria-labelledby="modal-electricity-title">
+    <div class="solution-modal-panel solution-modal-panel-split" role="dialog" aria-modal="true" aria-labelledby="modal-electricity-title">
         <button type="button" class="solution-modal-close" data-modal-close aria-label="Close">&times;</button>
-        <h2 id="modal-electricity-title" class="sr-only">Electricity — features &amp; platform capabilities</h2>
-        <img src="/assets/images/solution-electricity.png" alt="Electricity: STS-compliant electricity tokens delivered in real time across every vending channel. Payment Methods: Orange Money, MyZaka, BancABC, Standard Bank, Stanbic, cash via agents. Vending Channels: online portal, mobile app, agent network or USSD. Token Delivery: SMS, printed receipt or in-app notification. What's Included: ability to integrate with your payment and distribution networks.">
+        <div class="solution-modal-content">
+            <span class="eyebrow">Electricity</span>
+            <h2 id="modal-electricity-title">STS-compliant electricity tokens, delivered in real time</h2>
+            <p class="text-grey">Electricity tokens delivered in real time across every vending channel, straight to the meter.</p>
+            <ul class="solution-modal-features">
+                <li><strong>Payment Methods</strong> — Orange Money, MyZaka, BancABC, Standard Bank, Stanbic, cash via agents.</li>
+                <li><strong>Vending Channels</strong> — online portal, mobile app, agent network or USSD.</li>
+                <li><strong>Token Delivery</strong> — SMS, printed receipt or in-app notification.</li>
+                <li><strong>What's Included</strong> — ability to integrate with your payment and distribution networks.</li>
+            </ul>
+        </div>
+        <div class="solution-modal-media-grid">
+            <img class="solution-media-photo" src="/assets/images/solution-electricity-customer.jpg" alt="Customer entering a prepaid electricity token into a wall-mounted meter">
+            <img src="/assets/images/solution-electricity-meter-hexing.jpg" alt="Hexing HXE115-KP prepaid electricity meter with keypad token entry">
+            <img src="/assets/images/solution-electricity-meter-conlog.jpg" alt="Conlog BEC62 prepaid electricity meter and UIU keypad token reader">
+        </div>
     </div>
 </div>
 
 <div class="solution-modal" id="modal-gas" aria-hidden="true">
     <div class="solution-modal-backdrop" data-modal-close></div>
-    <div class="solution-modal-panel solution-modal-panel-image" role="dialog" aria-modal="true" aria-labelledby="modal-gas-title">
+    <div class="solution-modal-panel solution-modal-panel-split" role="dialog" aria-modal="true" aria-labelledby="modal-gas-title">
         <button type="button" class="solution-modal-close" data-modal-close aria-label="Close">&times;</button>
-        <h2 id="modal-gas-title" class="sr-only">Gas — features &amp; platform capabilities</h2>
-        <img src="/assets/images/solution-gas.png" alt="Gas: prepaid gas tokens for residential and commercial customers, vended the same reliable way. Meter and Account Management: complete meter lifecycle inventory, configuration and status monitoring. Tariff Management: flexible tariff structures, pricing plans and automatic updates. Customer Management: customer lifecycle management, arrears control and credit management. What's Included: meter-independent design, so you can choose your preferred meter suppliers without changing vending systems.">
+        <div class="solution-modal-content">
+            <span class="eyebrow">Gas</span>
+            <h2 id="modal-gas-title">Prepaid gas tokens, vended the same reliable way</h2>
+            <p class="text-grey">Gas tokens for residential and commercial customers — vended through the same reliable platform as every other utility.</p>
+            <ul class="solution-modal-features">
+                <li><strong>Meter and Account Management</strong> — complete meter lifecycle inventory, configuration and status monitoring.</li>
+                <li><strong>Tariff Management</strong> — flexible tariff structures, pricing plans and automatic updates.</li>
+                <li><strong>Customer Management</strong> — customer lifecycle management, arrears control and credit management.</li>
+                <li><strong>What's Included</strong> — meter-independent design, so you can choose your preferred meter suppliers without changing vending systems.</li>
+            </ul>
+        </div>
+        <div class="solution-modal-media-grid">
+            <img src="/assets/images/solution-gas-meter-secure.jpg" alt="Secure Liberty EG4v11 prepaid gas meter with keypad token entry">
+            <img src="/assets/images/solution-gas-meter-dcesn.jpg" alt="DCESN prepaid gas meter with keypad token entry">
+            <img src="/assets/images/solution-gas-meter-3.jpg" alt="Prepaid gas meter with keypad token entry and integrated shut-off valve">
+        </div>
     </div>
 </div>
 
-<div class="solution-modal" id="modal-airtime" aria-hidden="true">
+<div class="solution-modal" id="modal-time" aria-hidden="true">
     <div class="solution-modal-backdrop" data-modal-close></div>
-    <div class="solution-modal-panel solution-modal-panel-image" role="dialog" aria-modal="true" aria-labelledby="modal-airtime-title">
+    <div class="solution-modal-panel solution-modal-panel-split" role="dialog" aria-modal="true" aria-labelledby="modal-time-title">
         <button type="button" class="solution-modal-close" data-modal-close aria-label="Close">&times;</button>
-        <h2 id="modal-airtime-title" class="sr-only">Airtime — features &amp; platform capabilities</h2>
-        <img src="/assets/images/solution-airtime.png" alt="Airtime: mobile airtime top-ups alongside your utility tokens, all through one platform. Analytics & Reporting: real-time dashboards, reports and insights for operational excellence. API & Partner Integration: secure integration with payment, banking, mobile-money and distribution networks. Bulk & Corporate Vending: multi-site purchasing, controlled distribution and dedicated support. What's Included: configurable to support many independent utilities, each with its own access and management interface.">
+        <div class="solution-modal-content">
+            <span class="eyebrow">Time</span>
+            <h2 id="modal-time-title">Token-activated timers for shared equipment</h2>
+            <p class="text-grey">A token closes the circuit, the countdown starts, and the equipment shuts off automatically when time runs out — no supervision, no cash handling.</p>
+            <ul class="solution-modal-features">
+                <li><strong>Zero Supervision</strong> — facilities operate 24/7 without needing on-site cash handling or staff monitoring.</li>
+                <li><strong>Hardware Protection</strong> — prevents equipment burnout by physically limiting continuous machine runtime.</li>
+                <li><strong>Resource Conservation</strong> — drastically cuts utility waste by ending infinite water, power, or electricity consumption.</li>
+                <li><strong>Vandalism Deterrence</strong> — non-monetary tokens keep the physical machines safe from cash-seeking thieves.</li>
+            </ul>
+        </div>
+        <div class="solution-modal-media-grid">
+            <img src="/assets/images/solution-time-box-laundry.jpg" alt="Token-activated timer control box wired to two coin-operated washing machines">
+            <img src="/assets/images/solution-time-box-compact.jpg" alt="Compact lockable token timer box with digital countdown display">
+            <img src="/assets/images/solution-time-box-open.jpg" alt="Token timer control box open, showing the internal relay and wiring">
+        </div>
     </div>
 </div>
 
