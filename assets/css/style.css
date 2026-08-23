@@ -1839,7 +1839,32 @@ p { margin: 0 0 1em; }
     text-decoration-color: var(--color-bright-blue);
 }
 @media (max-width: 860px) {
-    .footer-grid { grid-template-columns: 1fr; }
+    /* Brand spans full width; Contact + Office Hours stack into one
+       compact left column, sitting beside the Site links on the right —
+       avoids 4 full-width stacked blocks running the footer long. */
+    .footer-grid {
+        grid-template-columns: 1fr 1fr;
+        grid-template-areas:
+            "brand brand"
+            "nav contact"
+            "nav hours";
+        gap: var(--space-5) var(--space-4);
+    }
+    .footer-brand { grid-area: brand; }
+    .footer-contact { grid-area: contact; }
+    .footer-hours { grid-area: hours; }
+    .footer-nav { grid-area: nav; }
+
+    .footer-grid h3 { font-size: 0.8rem; margin-bottom: 8px; }
+    .footer-nav ul li,
+    .footer-contact ul li { margin-bottom: 6px; font-size: 0.9rem; }
+    .footer-hours {
+        padding: 14px;
+    }
+    .footer-hours-icon { display: none; }
+    .footer-hours h3 { margin-bottom: 6px; }
+    .footer-hours-row { padding: 4px 0; font-size: 0.85rem; }
+    .footer-hours-note { margin-top: 8px; font-size: 0.75rem; }
 }
 
 /* Social icons */
