@@ -559,11 +559,6 @@ p { margin: 0 0 1em; }
     letter-spacing: -0.01em;
     color: var(--color-deep-blue);
 }
-.solutions-intro {
-    max-width: 680px;
-    margin: calc(-1 * var(--space-5)) 0 var(--space-6);
-}
-
 /* Main Solutions cards are real buttons (open the shared modal below) —
    reset the native button chrome so they still look exactly like .card */
 .card-solution {
@@ -573,6 +568,7 @@ p { margin: 0 0 1em; }
     cursor: pointer;
 }
 .card-solution-cta {
+    appearance: none;
     display: inline-flex;
     align-items: center;
     gap: 8px;
@@ -582,9 +578,11 @@ p { margin: 0 0 1em; }
     border: 2px solid var(--color-bright-blue);
     background: var(--color-light-blue);
     box-shadow: var(--shadow-sm);
+    font-family: inherit;
     font-size: var(--fs-sm);
     font-weight: 700;
     color: var(--color-deep-blue);
+    cursor: pointer;
     transition: background-color var(--duration-base) var(--ease-standard),
                 color var(--duration-base) var(--ease-standard),
                 border-color var(--duration-base) var(--ease-standard),
@@ -613,16 +611,56 @@ p { margin: 0 0 1em; }
     transform: translateY(0) scale(0.96);
 }
 
-/* Main Solutions cards as image covers — icon + title always visible over
-   a permanent dark scrim; the description + CTA are collapsed to zero
-   height and "pull up" into view on hover/focus (a real photo, so no
-   text is lost when hidden — it's just supporting detail). */
+/* Main Solutions cards — a real 3D flip card.
+   FRONT (rest): background photo, icon + title only, no scrim at all.
+   FRONT (hover/focus/tap): a white panel pulls up from the bottom with
+   the STS token definition in dark text, ending in an "Explore more"
+   button.
+   BACK (button pressed): the whole card tilts 180° to reveal a plain
+   white face with "How it works" steps and "Core Features" — a small
+   back button on that face tilts it back to the front. */
 .card-solution-media {
     position: relative;
-    overflow: hidden;
-    min-height: 280px;
+    min-height: 300px;
     padding: 0;
     background: var(--color-ink);
+    perspective: 1400px;
+}
+.card-solution-flip {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    min-height: 300px;
+    transform-style: preserve-3d;
+    transition: transform 0.7s cubic-bezier(0.4, 0.1, 0.2, 1);
+}
+.card-solution-media.is-flipped .card-solution-flip {
+    transform: rotateY(180deg);
+}
+/* overflow/pointer-events are deliberately kept off this shared rule —
+   combining overflow:hidden with backface-visibility:hidden on the same
+   element is a known cross-browser bug that lets the "hidden" face keep
+   intercepting clicks (and mouse-wheel scroll) even once rotated away.
+   Each face handles its own corner-rounding/clipping individually instead. */
+.card-solution-face {
+    position: absolute;
+    inset: 0;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    transition: opacity var(--duration-fast) linear;
+}
+.card-solution-face-back {
+    transform: rotateY(180deg);
+    opacity: 0;
+    pointer-events: none;
+}
+.card-solution-media.is-flipped .card-solution-face-front {
+    opacity: 0;
+    pointer-events: none;
+}
+.card-solution-media.is-flipped .card-solution-face-back {
+    opacity: 1;
+    pointer-events: auto;
 }
 .card-solution-bg {
     position: absolute;
@@ -630,23 +668,13 @@ p { margin: 0 0 1em; }
     width: 100%;
     height: 100%;
     object-fit: cover;
+    border-radius: var(--radius-md);
     z-index: 0;
     transition: transform var(--duration-slow) var(--ease-standard);
 }
 .card-solution-media:hover .card-solution-bg,
 .card-solution-media:focus-visible .card-solution-bg {
     transform: scale(1.06);
-}
-.card-solution-scrim {
-    position: absolute;
-    inset: 0;
-    z-index: 1;
-    background: linear-gradient(to top, rgba(6,16,26,0.92) 0%, rgba(6,16,26,0.6) 45%, rgba(6,16,26,0.1) 75%, transparent 100%);
-    transition: background var(--duration-base) var(--ease-standard);
-}
-.card-solution-media:hover .card-solution-scrim,
-.card-solution-media:focus-visible .card-solution-scrim {
-    background: linear-gradient(to top, rgba(6,16,26,0.95) 0%, rgba(6,16,26,0.78) 55%, rgba(6,16,26,0.3) 85%, rgba(6,16,26,0.05) 100%);
 }
 .card-solution-media .card-header-row {
     position: absolute;
@@ -660,212 +688,153 @@ p { margin: 0 0 1em; }
 .card-solution-media h3,
 .card-grid-simple .card-solution-media:hover h3 {
     color: var(--color-white);
+    text-shadow: 0 2px 10px rgba(0,0,0,0.55);
 }
 .card-solution-media .icon-badge {
-    background: rgba(255,255,255,0.18);
-    color: var(--color-white);
+    background: rgba(255,255,255,0.85);
+    color: var(--color-deep-blue);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.25);
 }
 .card-grid-simple .card-solution-media:hover .icon-badge {
     background: var(--color-bright-blue);
     color: var(--color-white);
 }
+/* Hover/focus/tap reveal — a white panel, not a dark scrim */
 .card-solution-reveal {
     position: absolute;
-    left: var(--space-5);
-    right: var(--space-5);
-    bottom: var(--space-5);
+    left: 0;
+    right: 0;
+    bottom: 0;
     z-index: 2;
     flex-basis: auto;
     display: grid;
     grid-template-rows: 0fr;
+    background: rgba(255,255,255,0.97);
+    border-radius: 0 0 var(--radius-md) var(--radius-md);
     transition: grid-template-rows var(--duration-base) var(--ease-standard);
 }
 .card-solution-reveal > div {
     overflow: hidden;
     min-height: 0;
+    padding: 0 var(--space-5);
 }
 .card-solution-media:hover .card-solution-reveal,
-.card-solution-media:focus-visible .card-solution-reveal {
+.card-solution-media:focus-visible .card-solution-reveal,
+.card-solution-media.is-open .card-solution-reveal {
     grid-template-rows: 1fr;
 }
+.card-solution-reveal > div > * { margin-top: var(--space-5); }
+.card-solution-reveal > div > *:last-child { margin-bottom: var(--space-5); }
 .card-solution-reveal p {
-    color: rgba(255,255,255,0.88);
-}
-.card-grid-simple .card-solution-media:hover p {
-    color: rgba(255,255,255,0.88);
+    color: var(--color-ink);
 }
 .card-grid-simple .card-solution-media:hover {
     background: var(--color-ink);
     text-align: left;
 }
-@media (prefers-reduced-motion: reduce) {
-    .card-solution-bg { transition: none; }
-}
-
-/* Solution details modal — shared by all 4 Main Solutions cards */
-.solution-modal {
-    position: fixed;
-    inset: 0;
-    z-index: 1000;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 24px;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity var(--duration-base) var(--ease-standard);
-}
-.solution-modal.is-open {
-    opacity: 1;
-    pointer-events: auto;
-}
-.solution-modal-backdrop {
-    position: absolute;
-    inset: 0;
-    background: rgba(35,31,32,0.6);
-}
-.solution-modal-panel {
-    position: relative;
-    z-index: 1;
-    width: min(900px, 100%);
-    max-height: calc(100vh - 48px);
-    overflow-y: auto;
+/* Back face content — a separate inner wrapper carries the background,
+   rounding and scroll-if-needed, kept off the backface-hidden element
+   itself (see the note on .card-solution-face above) */
+.card-solution-back-inner {
+    width: 100%;
+    height: 100%;
     background: var(--color-white);
-    border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-md);
-    padding: var(--space-7);
-    transform: scale(0.97);
-    opacity: 0;
-    transition: transform var(--duration-base) var(--ease-standard),
-                opacity var(--duration-base) var(--ease-standard);
+    border-radius: var(--radius-md);
+    padding: var(--space-4) var(--space-5) var(--space-5);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    overflow-y: auto;
 }
-.solution-modal.is-open .solution-modal-panel {
-    transform: scale(1);
-    opacity: 1;
-}
-.solution-modal-close {
-    position: absolute;
-    top: var(--space-5);
-    right: var(--space-5);
-    width: 36px;
-    height: 36px;
+.card-solution-back-btn {
+    align-self: flex-end;
+    flex-shrink: 0;
+    width: 28px;
+    height: 28px;
     border-radius: 50%;
     border: 0;
     background: var(--color-light-blue);
     color: var(--color-deep-blue);
-    font-size: 22px;
-    line-height: 1;
     display: flex;
     align-items: center;
     justify-content: center;
+    font-size: 13px;
     cursor: pointer;
     transition: background-color var(--duration-base) var(--ease-standard),
                 color var(--duration-base) var(--ease-standard);
 }
-.solution-modal-close:hover {
+.card-solution-back-btn:hover {
     background: var(--color-bright-blue);
     color: var(--color-white);
 }
-/* Image-only modal — the whole panel is one designed graphic, no HTML
-   text/cards at all; the close button floats on top of it. */
-.solution-modal-panel-image {
-    padding: 0;
+.card-solution-face-back h4 {
+    font-family: var(--font-heading);
+    color: var(--color-deep-blue);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin: 0;
 }
-.solution-modal-panel-image img {
-    display: block;
-    width: 100%;
-    height: auto;
-    border-radius: var(--radius-lg);
-}
-.solution-modal-header {
-    max-width: 680px;
-    margin-bottom: var(--space-6);
-}
-.solution-modal-header h2 {
-    font-size: var(--fs-lg);
-    letter-spacing: -0.01em;
-}
-
-/* Split-panel modal — real HTML text alongside product/hardware photography,
-   for solutions whose imagery is product shots (e.g. Water's meter
-   hardware) rather than a full-bleed lifestyle banner */
-.solution-modal-panel-split {
-    display: grid;
-    grid-template-columns: 1.1fr 0.9fr;
-    gap: var(--space-7);
-    align-items: center;
-}
-.solution-modal-content h2 {
-    font-size: var(--fs-lg);
-    letter-spacing: -0.01em;
-    margin-top: var(--space-2);
-}
-.solution-modal-media-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: var(--space-4);
-}
-.solution-modal-media-grid img {
-    width: 100%;
-    height: 100%;
-    aspect-ratio: 1 / 1;
-    object-fit: contain;
-    background: var(--color-light-blue);
-    border-radius: var(--radius-md);
-    padding: var(--space-4);
-}
-.solution-modal-media-grid img:first-child {
-    grid-column: 1 / -1;
-    aspect-ratio: 16 / 10;
-}
-/* A real lifestyle/action photo (own background, not a white product
-   shot) — fills its tile edge-to-edge instead of the light-blue,
-   padded, contain treatment used for hardware product shots */
-.solution-modal-media-grid img.solution-media-photo {
-    object-fit: cover;
-    object-position: center 20%;
-    background: none;
-    padding: 0;
-}
-.solution-modal-features {
-    margin: var(--space-5) 0 0;
-    padding: 0;
+.card-solution-steps {
     list-style: none;
+    counter-reset: step;
+    margin: 0;
+    padding: 0;
     display: flex;
     flex-direction: column;
-    gap: var(--space-4);
+    gap: 5px;
 }
-.solution-modal-features li {
-    padding-left: var(--space-5);
+.card-solution-steps li {
+    counter-increment: step;
     position: relative;
+    padding-left: 22px;
+    font-size: 0.78rem;
+    line-height: 1.35;
     color: var(--color-grey);
 }
-.solution-modal-features li::before {
+.card-solution-steps li::before {
+    content: counter(step);
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background: var(--color-light-blue);
+    color: var(--color-deep-blue);
+    font-size: 0.62rem;
+    font-weight: 700;
+    line-height: 15px;
+    text-align: center;
+}
+.card-solution-features {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+.card-solution-features li {
+    position: relative;
+    padding-left: 14px;
+    font-size: 0.78rem;
+    line-height: 1.35;
+    color: var(--color-grey);
+}
+.card-solution-features li::before {
     content: '';
     position: absolute;
     left: 0;
     top: 0.5em;
-    width: 8px;
-    height: 8px;
+    width: 5px;
+    height: 5px;
     border-radius: 50%;
     background: var(--color-bright-blue);
 }
-.solution-modal-features strong {
-    color: var(--color-ink);
-}
-@media (max-width: 720px) {
-    .solution-modal-panel-split {
-        grid-template-columns: 1fr;
-    }
-}
-.solution-modal .solutions-subsection {
-    margin-top: var(--space-7);
-}
 @media (prefers-reduced-motion: reduce) {
-    .solution-modal,
-    .solution-modal-panel {
-        transition: none;
-    }
+    .card-solution-bg,
+    .card-solution-flip { transition: none; }
 }
 
 /* Stats strip */
@@ -904,244 +873,92 @@ p { margin: 0 0 1em; }
     max-width: 340px;
 }
 
-/* Card scroll — a horizontally scrollable row instead of wrapping, for
-   sets with too many cards to comfortably grid (e.g. Corporate & Bulk
-   Vending's 7 audience cards). Snaps card-by-card; the prev/next buttons
-   drive it, so the native scrollbar is hidden rather than shown. */
-.card-scroll-wrap {
-    display: flex;
-    align-items: center;
-    gap: var(--space-4);
-}
-.card-scroll {
-    display: flex;
-    flex: 1;
-    min-width: 0;
-    gap: var(--space-5);
-    overflow-x: auto;
-    scroll-snap-type: x proximity;
-    padding: 8px 2px var(--space-4);
-    scrollbar-width: none;
-}
-.card-scroll::-webkit-scrollbar {
-    display: none;
-}
-.card-scroll > .card {
-    flex: 0 0 300px;
-    max-width: 320px;
-    scroll-snap-align: start;
-}
-.card-scroll-nav {
-    flex-shrink: 0;
-    width: 44px;
-    height: 44px;
-    border-radius: 50%;
-    border: 1px solid rgba(35,31,32,0.12);
-    background: var(--color-white);
-    color: var(--color-deep-blue);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 18px;
-    cursor: pointer;
-    box-shadow: var(--shadow-sm);
-    transition: background-color var(--duration-base) var(--ease-standard),
-                color var(--duration-base) var(--ease-standard);
-}
-.card-scroll-nav:hover {
-    background: var(--color-bright-blue);
-    color: var(--color-white);
-    border-color: transparent;
-}
-.card-scroll-nav:disabled {
-    opacity: 0.35;
-    cursor: default;
-    pointer-events: none;
-}
-@media (max-width: 640px) {
-    .card-scroll-nav { display: none; }
-}
-@media (max-width: 480px) {
-    .card-scroll > .card { flex-basis: 260px; }
-}
-
-/* Partner showcase cards (partners page utility/municipal partners) — wider
-   cards, and on hover the logo (not the icon) pops to center and enlarges. */
-.partner-showcase.card-grid > .card {
-    flex-basis: 320px;
-    max-width: 480px;
-}
-.partner-showcase .card .partner-logo {
-    transition: transform var(--duration-slow) var(--ease-standard),
-                margin var(--duration-slow) var(--ease-standard);
-}
-.partner-showcase .card:hover .partner-logo {
-    margin-left: auto;
-    margin-right: auto;
-    transform: scale(1.35);
-}
-.partner-showcase .card:hover .icon-badge {
-    margin-left: 0;
-    margin-right: 0;
-    transform: none;
-    box-shadow: none;
-    background: var(--color-bright-blue);
-    color: var(--color-white);
-}
-
-/* Two-image crossfade for a logo that needs a different version at rest
-   (on the card's white background) vs on hover (card inverts to a dark
-   background, per .card:hover) — e.g. Leeroy Systems: a dark-on-white mark
-   by default, swapping to the white-on-transparent mark on hover. No chip
-   or background box needed either way since each version already matches
-   its own background. */
-.partner-logo-swap {
-    position: relative;
-    display: block;
-    width: 140px;
-    height: 40px;
-    margin-bottom: var(--space-4);
-}
-.partner-showcase .card .partner-logo-swap .partner-logo {
-    position: absolute;
-    inset: 0;
-    max-height: none;
-    object-position: center center;
-    transition: opacity var(--duration-base) var(--ease-standard),
-                transform var(--duration-slow) var(--ease-standard);
-}
-/* Default (rest) mark: same 140x40 footprint as the plain .partner-logo
-   (e.g. WUC) — no cropping, shown whole like every other partner logo */
-.partner-logo-swap .partner-logo-default {
-    width: 100%;
-    height: 100%;
-    margin: 0;
-    object-fit: contain;
-}
-/* Hover mark: same footprint, centered within the wrapper via auto margins
-   on all sides (inset:0 + fixed width/height + margin:auto) — shown whole */
-.partner-logo-swap .partner-logo-hover {
-    width: 140px;
-    height: 40px;
-    margin: auto;
-    object-fit: contain;
-    opacity: 0;
-}
-.partner-card-expand:hover .partner-logo-swap .partner-logo-default,
-.partner-card-expand:focus-within .partner-logo-swap .partner-logo-default,
-.partner-card-expand.is-open .partner-logo-swap .partner-logo-default {
-    opacity: 0;
-}
-.partner-card-expand:hover .partner-logo-swap .partner-logo-hover,
-.partner-card-expand:focus-within .partner-logo-swap .partner-logo-hover,
-.partner-card-expand.is-open .partner-logo-swap .partner-logo-hover {
-    opacity: 1;
-}
-.partner-showcase .card:hover .partner-logo-swap {
-    margin-left: auto;
-    margin-right: auto;
-    transform: scale(1.35);
-}
-.partner-showcase .card:hover .partner-logo-swap .partner-logo-hover {
-    transform: none;
-}
-
-/* Partner card drop-down: logo and title always show; the description
-   reveals on hover, keyboard focus, or a tap-to-toggle .is-open class */
-.partner-card-expand .partner-card-desc {
+/* Fixed 4-up grid (e.g. Corporate & Bulk Vending's 8 audience cards) —
+   guaranteed 4 per row on desktop instead of flex-wrap's variable count */
+.card-grid-quarters {
     display: grid;
-    grid-template-rows: 0fr;
-    overflow: hidden;
-    transition: grid-template-rows var(--duration-base) var(--ease-standard);
+    grid-template-columns: repeat(4, 1fr);
 }
-.partner-card-expand .partner-card-desc p {
-    overflow: hidden;
-    min-height: 0;
-    margin: 0;
+.card-grid-quarters > .card {
+    max-width: none;
 }
-.partner-card-expand:hover .partner-card-desc,
-.partner-card-expand:focus-within .partner-card-desc,
-.partner-card-expand.is-open .partner-card-desc {
-    grid-template-rows: 1fr;
-    margin-top: 8px;
+@media (max-width: 900px) {
+    .card-grid-quarters { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 520px) {
+    .card-grid-quarters { grid-template-columns: 1fr; }
 }
 
-/* Plain vertical card stack (no card-grid parent) — e.g. About's Mission/Vision pair */
-.card-stack-plain {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-5);
-}
 
-/* About page: full-width story card sitting above the
-   Mission+Vision / Core Values row — plain, no hover interaction
-   (it's static text, not a clickable/actionable card) */
+/* About page: full-width story card, and the Mission+Vision card sitting
+   directly beneath it — both plain, no hover interaction (static text,
+   not a clickable/actionable card) */
 .about-story-card {
     margin-bottom: var(--space-7);
 }
 .about-story-card h2 {
     flex-basis: 100%;
 }
-.about-story-card:hover {
-    background: var(--color-white);
-    border-color: rgba(35,31,32,0.06);
-    box-shadow: var(--shadow-card);
-    transform: none;
-    text-align: left;
-}
-.about-story-card:hover p {
-    color: var(--color-grey);
-}
 
-/* STS Association logo, standing in for the old feature-media image in the
-   Compliance section — sized to roughly match the paragraph column beside it */
-.about-sts-logo {
+/* Compliance section — the STS "Compliant. Globally Trusted." banner as a
+   compact full-bleed background, with a dark scrim so the white heading
+   and copy stay legible regardless of how the shrunk box crops it. */
+.compliance-banner {
+    position: relative;
+    overflow: hidden;
+    border-radius: var(--radius-lg);
+    min-height: clamp(160px, 15vw, 220px);
+    box-shadow: var(--shadow-card);
     display: flex;
     align-items: center;
-    justify-content: center;
-    min-height: 220px;
-    background: var(--color-white);
-    border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-card);
-    padding: var(--space-6);
-    transition: box-shadow var(--duration-base) var(--ease-standard),
-                transform var(--duration-base) var(--ease-standard);
 }
-.about-sts-logo:hover {
-    box-shadow: var(--shadow-md);
-    transform: translateY(-4px);
+.compliance-banner-bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: left center;
 }
-.about-sts-logo img {
-    max-width: 100%;
-    max-height: 200px;
-    width: auto;
-    height: auto;
-    object-fit: contain;
-    display: block;
+.compliance-banner::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, rgba(0,20,40,0.75) 0%, rgba(0,20,40,0.55) 55%, rgba(0,20,40,0.3) 100%);
+}
+.compliance-banner-content {
+    position: relative;
+    z-index: 1;
+    max-width: 560px;
+    padding: var(--space-5) var(--space-7);
+}
+.compliance-banner-content .eyebrow {
+    color: var(--color-white);
+    opacity: 0.85;
+}
+.compliance-banner-content h2 {
+    color: var(--color-white);
+}
+.compliance-banner-content p {
+    color: var(--color-white);
+    opacity: 0.92;
+    margin-bottom: 0;
+}
+@media (max-width: 640px) {
+    .compliance-banner-content { padding: var(--space-5); }
 }
 
-/* Soft container "envelope" grouping the Mission + Vision cards — plain
-   (no hover invert of its own), just a backdrop distinguishing the group
-   from the Core Values column beside it */
-.card-group {
-    background: var(--color-light-blue);
-    border-radius: var(--radius-lg);
-    padding: var(--space-5);
-}
-
-/* Mission+Vision and Core Values stretch to match heights, so the bottom
-   of the (shorter, collapsed) Core Values list lines up with the bottom
-   of the Mission+Vision group instead of leaving it short. */
-.about-values-row {
-    align-items: stretch;
-}
-.about-values-col {
+/* Mission + Vision — one combined card directly under Our Story; reuses
+   .about-story-card for identical styling and hover-neutral behavior,
+   with an inner flex-column stack for the two blocks. */
+.about-mission-vision-card {
     display: flex;
     flex-direction: column;
+    align-items: stretch;
+    gap: var(--space-6);
 }
-.about-values-col .value-list {
-    flex: 1;
-    justify-content: space-between;
+.mission-vision-block h3 {
+    margin-bottom: 8px;
 }
 
 /* Compact value-list — same design as the full-width Core Values list,
@@ -1254,6 +1071,15 @@ p { margin: 0 0 1em; }
     transform: translateY(-6px);
     text-align: center;
 }
+/* Our Story / Mission / Vision card is static text, not an actionable
+   card — fully opt out of the dark-invert hover treatment above. */
+.about-story-card:hover {
+    background: var(--color-white);
+    border-color: rgba(35,31,32,0.06);
+    box-shadow: var(--shadow-card);
+    transform: none;
+    text-align: left;
+}
 /* Icon + heading sit on one row; everything else (paragraphs, lists,
    buttons, brand strips...) wraps onto its own full-width line below. */
 .card > *:not(.icon-badge):not(h3) {
@@ -1269,14 +1095,6 @@ p { margin: 0 0 1em; }
     transition: color var(--duration-base) var(--ease-standard);
 }
 
-/* Bespoke partner-showcase layout keeps its original stacked design (an
-   image sits between the icon and heading, with its own hover choreography) */
-.partner-showcase .card {
-    display: block;
-}
-.partner-showcase .card h3 {
-    margin-bottom: 10px;
-}
 /* Icon + heading kept on one line instead of the default stacked layout */
 .card-header-row {
     display: flex;
@@ -1287,13 +1105,7 @@ p { margin: 0 0 1em; }
 .card-header-row .icon-badge { margin-bottom: 0; flex-shrink: 0; }
 .card-header-row h3 { margin-bottom: 0; }
 .card:hover h3 { color: var(--color-white); }
-.partner-logo {
-    max-height: 40px;
-    max-width: 100%;
-    width: auto;
-    object-fit: contain;
-    margin-bottom: var(--space-4);
-}
+.about-story-card:hover h3 { color: var(--color-deep-blue); }
 
 /* Partner logo marquee — continuous horizontal scroll, pauses on hover, each tile still spins on its own hover */
 .partner-marquee {
@@ -1384,6 +1196,8 @@ p { margin: 0 0 1em; }
 .card p { color: var(--color-grey); margin-bottom: 0; transition: color var(--duration-base) var(--ease-standard); }
 .card:hover p { color: rgba(255,255,255,0.82); }
 .card:hover .text-grey { color: rgba(255,255,255,0.82); }
+.about-story-card:hover p,
+.about-story-card:hover .text-grey { color: var(--color-grey); }
 .card:hover .btn-outline {
     border-color: rgba(255,255,255,0.7);
     color: var(--color-white);
@@ -1511,10 +1325,6 @@ p { margin: 0 0 1em; }
 .highlight-item p {
     margin: 0;
     color: rgba(255,255,255,0.9);
-}
-.highlight-cta {
-    margin-top: var(--space-7);
-    text-align: center;
 }
 .icon {
     width: 1em;
@@ -1704,25 +1514,6 @@ p { margin: 0 0 1em; }
     .value-row { gap: 16px; padding: 18px 8px; }
     .value-index { width: 40px; font-size: 1.6rem; }
     .value-icon { width: 44px; height: 44px; font-size: 20px; }
-}
-
-/* Definition-style list (specs) */
-.spec-list dt {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-weight: 700;
-    color: var(--color-deep-blue);
-    margin-top: 18px;
-}
-.spec-list dt .icon {
-    font-size: 18px;
-    color: var(--color-bright-blue);
-    flex-shrink: 0;
-}
-.spec-list dd {
-    margin: 4px 0 0;
-    color: var(--color-grey);
 }
 
 /* Checklist */

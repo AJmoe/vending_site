@@ -4,6 +4,8 @@ $page_description = 'The story, mission, vision, values and partners behind Reli
 require __DIR__ . '/includes/header.php';
 
 $techPartners = [
+    ['name' => 'Water Utilities Corporation', 'url' => 'https://www.wuc.bw/', 'logo' => '/assets/images/partner-wuc.png'],
+    ['name' => 'Leeroy Systems', 'logo' => '/assets/images/partner-leeroysystems-default.png'],
     ['name' => 'Lesira', 'url' => 'https://lesira.co.za/', 'logo' => '/assets/images/partner-lesira.png'],
     ['name' => 'Honeywell', 'url' => 'https://www.honeywell.com/us/en', 'logo' => '/assets/images/partner-honeywell.png'],
     ['name' => 'SH Meters', 'url' => 'https://www.sh-meters.com/', 'logo' => '/assets/images/partner-sh-meters.webp'],
@@ -23,81 +25,76 @@ $techPartners = [
 
 <section class="section section-tight">
     <div class="container">
-        <div class="card about-story-card" data-reveal>
+        <div class="card about-story-card about-mission-vision-card" data-reveal>
             <h2>Our story</h2>
             <p class="text-grey">Reliable Vending Solutions was established to make essential services more accessible, convenient, and reliable for individuals and businesses. The company recognized the growing need for efficient prepaid utility, payment, and vending solutions in an increasingly digital world.</p>
             <p class="text-grey">By combining technology with customer-focused service, we simplify everyday transactions and improve accessibility. Our commitment to innovation, reliability, and excellence has enabled us to build trusted relationships with customers and partners. Today, we continue to deliver solutions that empower communities and create lasting value.</p>
+            <div class="mission-vision-block">
+                <h3> Mission</h3>
+                <p class="text-grey">To deliver reliable, convenient, and technology-driven vending and prepaid solutions that enhance customer experiences, create value for stakeholders, and contribute to the growth and development of the communities we serve.</p>
+            </div>
+            <div class="mission-vision-block">
+                <h3> Vision</h3>
+                <p class="text-grey">To become the leading provider of innovative vending, prepaid utility, and automated retail solutions in Africa, transforming the way people access essential products and services.</p>
+            </div>
         </div>
+    </div>
+</section>
 
-        <div class="two-col about-values-row" data-reveal-stagger>
-            <div class="card-group" data-reveal>
-                <div class="card-stack-plain">
-                    <div class="card">
-                        <h3>Our Mission</h3>
-                        <p class="text-grey">To deliver reliable, convenient, and technology-driven vending and prepaid solutions that enhance customer experiences, create value for stakeholders, and contribute to the growth and development of the communities we serve.</p>
-                    </div>
-                    <div class="card">
-                        <h3>Our Vision</h3>
-                        <p class="text-grey">To become the leading provider of innovative vending, prepaid utility, and automated retail solutions in Africa, transforming the way people access essential products and services.</p>
+<section class="section section-alt section-tight">
+    <div class="container">
+        <div class="section-header" data-reveal>
+            <span class="eyebrow">What drives us</span>
+            <h2>Core values</h2>
+        </div>
+        <div class="value-list value-list-compact" data-reveal-stagger>
+            <div class="value-row value-row-expand" tabindex="0" data-reveal>
+                <span class="value-index">01</span>
+                <div class="value-icon"><?= icon('heart') ?></div>
+                <div class="value-text">
+                    <h3>Reliable</h3>
+                    <div class="value-desc">
+                        <p>You can count on our platform, day and night — tokens generate and deliver without fail, so customers never lose power over a technical hiccup.</p>
                     </div>
                 </div>
             </div>
-
-            <div class="about-values-col" data-reveal>
-                <div class="section-header">
-                    <span class="eyebrow">What drives us</span>
-                    <h2>Core values</h2>
+            <div class="value-row value-row-expand" tabindex="0" data-reveal>
+                <span class="value-index">02</span>
+                <div class="value-icon"><?= icon('shield') ?></div>
+                <div class="value-text">
+                    <h3>Secure</h3>
+                    <div class="value-desc">
+                        <p>Every transaction runs through STS-compliant, encrypted processes — protecting customer data and utility revenue at every step.</p>
+                    </div>
                 </div>
-                <div class="value-list value-list-compact">
-                    <div class="value-row value-row-expand" tabindex="0">
-                        <span class="value-index">01</span>
-                        <div class="value-icon"><?= icon('heart') ?></div>
-                        <div class="value-text">
-                            <h3>Reliable</h3>
-                            <div class="value-desc">
-                                <p>You can count on our platform, day and night — tokens generate and deliver without fail, so customers never lose power over a technical hiccup.</p>
-                            </div>
-                        </div>
+            </div>
+            <div class="value-row value-row-expand" tabindex="0" data-reveal>
+                <span class="value-index">03</span>
+                <div class="value-icon"><?= icon('brain') ?></div>
+                <div class="value-text">
+                    <h3>Smart</h3>
+                    <div class="value-desc">
+                        <p>Real-time dashboards and reporting turn raw transaction data into insight, so you always know exactly what's happening across operations.</p>
                     </div>
-                    <div class="value-row value-row-expand" tabindex="0">
-                        <span class="value-index">02</span>
-                        <div class="value-icon"><?= icon('shield') ?></div>
-                        <div class="value-text">
-                            <h3>Secure</h3>
-                            <div class="value-desc">
-                                <p>Every transaction runs through STS-compliant, encrypted processes — protecting customer data and utility revenue at every step.</p>
-                            </div>
-                        </div>
+                </div>
+            </div>
+            <div class="value-row value-row-expand" tabindex="0" data-reveal>
+                <span class="value-index">04</span>
+                <div class="value-icon"><?= icon('trending-up') ?></div>
+                <div class="value-text">
+                    <h3>Scalable</h3>
+                    <div class="value-desc">
+                        <p>From a single vending agent to multi-site institutional deployments, our platform grows with you — no rebuilding required.</p>
                     </div>
-                    <div class="value-row value-row-expand" tabindex="0">
-                        <span class="value-index">03</span>
-                        <div class="value-icon"><?= icon('brain') ?></div>
-                        <div class="value-text">
-                            <h3>Smart</h3>
-                            <div class="value-desc">
-                                <p>Real-time dashboards and reporting turn raw transaction data into insight, so you always know exactly what's happening across operations.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="value-row value-row-expand" tabindex="0">
-                        <span class="value-index">04</span>
-                        <div class="value-icon"><?= icon('trending-up') ?></div>
-                        <div class="value-text">
-                            <h3>Scalable</h3>
-                            <div class="value-desc">
-                                <p>From a single vending agent to multi-site institutional deployments, our platform grows with you — no rebuilding required.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="value-row value-row-expand" tabindex="0">
-                        <span class="value-index">05</span>
-                        <div class="value-icon"><?= icon('leaf') ?></div>
-                        <div class="value-text">
-                            <h3>Sustainable</h3>
-                            <div class="value-desc">
-                                <p>We build for the long term, supporting the responsible, lasting growth of the utilities and communities we serve.</p>
-                            </div>
-                        </div>
+                </div>
+            </div>
+            <div class="value-row value-row-expand" tabindex="0" data-reveal>
+                <span class="value-index">05</span>
+                <div class="value-icon"><?= icon('leaf') ?></div>
+                <div class="value-text">
+                    <h3>Sustainable</h3>
+                    <div class="value-desc">
+                        <p>We build for the long term, supporting the responsible, lasting growth of the utilities and communities we serve.</p>
                     </div>
                 </div>
             </div>
@@ -106,15 +103,15 @@ $techPartners = [
 </section>
 
 <section class="section section-tight">
-    <div class="container two-col" data-reveal-stagger>
-        <div data-reveal>
-            <span class="eyebrow">Compliance</span>
-            <h2>Accreditations &amp; regulatory compliance</h2>
-            <p class="text-grey">Through adherence to <a href="https://www.sts.org.za/" target="_blank" rel="noopener">STS-compliant</a> technologies and processes, Reliable Vending Solutions contributes to the integrity, security, and efficiency of prepaid utility services. This commitment reinforces our dedication to delivering trusted solutions, protecting customer interests, and supporting the sustainable growth of the prepaid utility industry.</p>
+    <div class="container">
+        <div class="compliance-banner" data-reveal>
+            <img class="compliance-banner-bg" src="/assets/images/hero-banner-2.png" alt="">
+            <div class="compliance-banner-content">
+                <span class="eyebrow">Compliance</span>
+                <h2>Accreditations &amp; regulatory compliance</h2>
+                <p>Through adherence to <a href="https://www.sts.org.za/" target="_blank" rel="noopener">STS-compliant</a> technologies and processes, Reliable Vending Solutions contributes to the integrity, security, and efficiency of prepaid utility services. This commitment reinforces our dedication to delivering trusted solutions, protecting customer interests, and supporting the sustainable growth of the prepaid utility industry.</p>
+            </div>
         </div>
-        <a class="about-sts-logo" href="https://www.sts.org.za/" target="_blank" rel="noopener" data-reveal>
-            <img src="/assets/images/sts-association-logo.png" alt="STS Association member">
-        </a>
     </div>
 </section>
 
@@ -167,44 +164,14 @@ $techPartners = [
 <section class="section section-tight">
     <div class="container">
         <div class="section-header" data-reveal>
-            <span class="eyebrow">Utility &amp; Municipal Partners</span>
-            <h2>Trusted by utility providers</h2>
-        </div>
-        <div class="card-grid partner-showcase" data-reveal-stagger>
-            <div class="card partner-card-expand" data-reveal tabindex="0">
-                <div class="icon-badge"><?= icon('droplet') ?></div>
-                <img class="partner-logo" src="/assets/images/partner-wuc.png" alt="Water Utilities Corporation logo">
-                <h3>Water Utilities Corporation</h3>
-                <div class="partner-card-desc">
-                    <p>Partnering to bring secure, STS-compliant prepaid water token vending to households and businesses. Together, we're making water access more convenient, transparent and reliable for every customer.</p>
-                </div>
-            </div>
-            <div class="card partner-card-expand" data-reveal tabindex="0">
-                <div class="icon-badge"><?= icon('gauge') ?></div>
-                <span class="partner-logo-swap">
-                    <img class="partner-logo partner-logo-default" src="/assets/images/partner-leeroysystems-default.png" alt="Leeroy Systems logo">
-                    <img class="partner-logo partner-logo-hover" src="/assets/images/leeroywhite.png" alt="" aria-hidden="true">
-                </span>
-                <h3>Leeroy Systems</h3>
-                <div class="partner-card-desc">
-                    <p>Our smart prepaid water metering (SPWM) partner, supplying the metering technology that connects seamlessly with our vending platform — keeping every reading accurate and every token honoured.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<section class="section section-alt section-tight">
-    <div class="container">
-        <div class="section-header" data-reveal>
-            <span class="eyebrow">Technology &amp; Hardware Partners</span>
-            <h2>STS-compliant meter hardware suppliers</h2>
+            <span class="eyebrow"></span>
+            <h2>Technology and Affiliate Partners</h2>
         </div>
         <div class="partner-marquee" data-reveal>
             <div class="partner-marquee-track">
                 <?php for ($rep = 0; $rep < 2; $rep++): ?>
                     <?php foreach ($techPartners as $partner): $tag = !empty($partner['url']) ? 'a' : 'div'; ?>
-                    <<?= $tag ?> class="partner-tile"<?php if ($rep > 0): ?> aria-hidden="true" tabindex="-1"<?php endif; ?><?php if (!empty($partner['url'])): ?> href="<?= htmlspecialchars($partner['url']) ?>" target="_blank" rel="noopener"<?php endif; ?> title="<?= htmlspecialchars($partner['name']) ?> — STS-compliant meter hardware supplier">
+                    <<?= $tag ?> class="partner-tile"<?php if ($rep > 0): ?> aria-hidden="true" tabindex="-1"<?php endif; ?><?php if (!empty($partner['url'])): ?> href="<?= htmlspecialchars($partner['url']) ?>" target="_blank" rel="noopener"<?php endif; ?> title="<?= htmlspecialchars($partner['name']) ?> — Reliable Vending Solutions partner">
                         <?php if (!empty($partner['logo'])): ?>
                             <img src="<?= htmlspecialchars($partner['logo']) ?>" alt="<?= htmlspecialchars($partner['name']) ?> logo">
                         <?php else: ?>
@@ -216,34 +183,7 @@ $techPartners = [
                 <?php endfor; ?>
             </div>
         </div>
-        <p class="text-grey partner-strip-note">Freedom to choose your preferred meter hardware supplier — no lock-in, ever.</p>
-    </div>
-</section>
-
-<section class="section section-tight">
-    <div class="container two-col" data-reveal-stagger>
-        <div data-reveal>
-            <span class="eyebrow">Become a Partner / Agent</span>
-            <h2>Grow with Reliable Vending Solutions</h2>
-            <p class="text-grey">We work with vending agents, resellers and municipality integration partners across Botswana.</p>
-            <dl class="spec-list">
-                <dt><?= icon('handshake') ?> Partnership types</dt>
-                <dd>Vending agent, reseller, municipality integration partner.</dd>
-
-                <dt><?= icon('badge-check') ?> Requirements</dt>
-                <dd>A physical outlet, a smartphone, and completion of our training programme.</dd>
-
-                <dt><?= icon('trending-up') ?> Benefits</dt>
-                <dd>Commission per token sold, a free terminal, and full training provided.</dd>
-            </dl>
-        </div>
-        <div class="card" data-reveal>
-            <h3>Partner With Us</h3>
-            <p class="text-grey">Ready to apply, or have questions about becoming an agent?</p>
-            <p><strong>Phone:</strong> <a href="tel:<?= htmlspecialchars(preg_replace('/[^+\d]/', '', CONTACT_PHONE)) ?>"><?= htmlspecialchars(CONTACT_PHONE) ?></a></p>
-            <p><strong>Email:</strong> <a href="mailto:<?= htmlspecialchars(CONTACT_EMAIL) ?>"><?= htmlspecialchars(CONTACT_EMAIL) ?></a></p>
-            <a class="btn btn-primary" href="/contact.php">Partner With Us</a>
-        </div>
+        <p class="text-grey partner-strip-note">From utility providers to hardware manufacturers trusted partners across the region.</p>
     </div>
 </section>
 

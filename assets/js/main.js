@@ -30,10 +30,4 @@ document.addEventListener('DOMContentLoaded', function () {
             row.classList.toggle('is-open');
         });
     });
-
-    document.querySelectorAll('.partner-card-expand').forEach(function (card) {
-        card.addEventListener('click', function () {
-            card.classList.toggle('is-open');
-        });
-    });
 });
