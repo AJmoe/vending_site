@@ -22,7 +22,7 @@ require __DIR__ . '/includes/header.php';
             <div class="card card-solution card-solution-media" data-reveal tabindex="0">
                 <div class="card-solution-flip">
                     <div class="card-solution-face card-solution-face-front">
-                        <img class="card-solution-bg" src="/assets/images/solution-water-meter-laison.jpg" alt="">
+                        <img class="card-solution-bg" src="/assets/images/solution-card-water.jpg" alt="">
                         <div class="card-header-row">
                             <div class="icon-badge"><?= icon('droplet') ?></div>
                             <h3>Water</h3>
@@ -59,7 +59,7 @@ require __DIR__ . '/includes/header.php';
             <div class="card card-solution card-solution-media" data-reveal tabindex="0">
                 <div class="card-solution-flip">
                     <div class="card-solution-face card-solution-face-front">
-                        <img class="card-solution-bg" src="/assets/images/solution-electricity-customer.jpg" alt="">
+                        <img class="card-solution-bg" src="/assets/images/solution-card-electricity.jpg" alt="">
                         <div class="card-header-row">
                             <div class="icon-badge"><?= icon('bolt') ?></div>
                             <h3>Electricity</h3>
@@ -96,7 +96,7 @@ require __DIR__ . '/includes/header.php';
             <div class="card card-solution card-solution-media" data-reveal tabindex="0">
                 <div class="card-solution-flip">
                     <div class="card-solution-face card-solution-face-front">
-                        <img class="card-solution-bg" src="/assets/images/solution-gas-meter-secure.jpg" alt="">
+                        <img class="card-solution-bg" src="/assets/images/solution-card-gas.jpg" alt="">
                         <div class="card-header-row">
                             <div class="icon-badge"><?= icon('flame') ?></div>
                             <h3>Gas</h3>
@@ -133,7 +133,7 @@ require __DIR__ . '/includes/header.php';
             <div class="card card-solution card-solution-media" data-reveal tabindex="0">
                 <div class="card-solution-flip">
                     <div class="card-solution-face card-solution-face-front">
-                        <img class="card-solution-bg" src="/assets/images/solution-time-box-laundry.jpg" alt="">
+                        <img class="card-solution-bg" src="/assets/images/solution-card-time.jpg" alt="">
                         <div class="card-header-row">
                             <div class="icon-badge"><?= icon('clock') ?></div>
                             <h3>Time</h3>
